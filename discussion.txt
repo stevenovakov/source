@@ -1,0 +1,149 @@
+Discussion
+==========
+
+In this section, we first give an intuitive interpretation of how the old Probtrackx algorithm works. Then, we present our OpenCL-architected solution: Oclptx. We then show the results of Oclptx, comparing both the correctness of the paths, as well as the speed, to the old tracking software.
+
+Algorithmic Theory
+------------------
+The tracking algorithm begins by loading multiple sets of fibers created by the bedpostx step.  It repeatedly drops “particles” into the space of the brain, and treats the estimated fiber directions as flow directions.  It steps its way through the brain, a fixed distance at a time, until it reaches some stopping condition, which is typically a user-defined mask.  There are many types of masks, and the differences between them are subtle.  Some masks indicate that the particle should be thrown away, others indicate that it should be stopped, and the result kept. 
+  
+The location of particles is determined by user-defined seeds.  Seeds can be defined individual in text-format, or as a series of volumes and surfaces which the program automatically iterates through. For each seed , many particles are instantiated.  Each particle begins at a random location within a sphere of radius one (voxel) of its seed point. Paths are then interpolated, using the fiber distribution, from this starting location.  Since the particle does not have an initial direction to help it decide which way to follow the first non-directional fibre, typically it will be run twice---once in each direction.  The relation between seeds, particles, and paths is shown in Figure 3.1.
+
+.. _particle:
+
+.. figure:: images/seed_part_path.pdf
+
+  Relation between seeds, particles, and paths.
+
+For each particle, there will be a resultant path, created by “stepping along” the selected fibers.  For each step, it is randomly determined which adjacent voxel to sample the interpolation direction from.  This selection is inversely proportional to the distance from the nearest vertex.  Once we have a vertex is selected, a fiber orientation must be selected.  There are several options for this, which are selected by the user at start time.  Either a preferred direction is chosen (in which case particles will tend to migrate in a particular direction), or the sampler chooses one of the following options: random with error weights, above a given error threshold, or entirely random.  This process is shown in Figure 3.2.
+
+.. _pathing:
+
+.. figure:: images/pathing.pdf
+
+  Interpolation and Pathing
+  
+Methods and Architecture
+------------------------
+
+Our Oclptx fits in as a seperate module in the FSL suite (Figure 3.3). The intention is that we take identical command-line parameters from a user using Oclptx as one using Probtrackx. These parameters are primarily Bedpostx data, along with brainmasks, and other user-specified options.
+
+.. _fsl:
+
+.. figure:: images/fsl.png
+  
+  Simplified diagram of FSL: BedpostX results are parsed and converted for use on the GPU via a "Samplemanager" class.
+
+Within Oclptx, we architect our code around three steps in the pipeline: Initialization, Interpolation, and Reduction (Figure 3.4).
+
+.. _oclptx:
+
+.. figure:: images/oclptx.pdf
+
+  Block diagram of the Oclptx pipeline. The :math:`F, \phi, \theta` parameters are read in via the initialization step, and then passed into the GPU interpolation and reduction scheme.
+
+Initialization
+^^^^^^^^^^^^^^
+In the initialization step of our code, we do away with the abstracted data structures that store the incoming user-data in the old Probtrackx suite. Instead, we manage our data in a custom class called Samplemanager. We implemented this class to prevent the duplication of data containers that were used naively in the old probtrackx. Samplemanager interacts directly with the old probtrackx command-line-parser, reading in the myriad of data the user can input (for a complete list of the options, see Appendix section). Samplemanager's primary purpose is to store the static bedpostx and mask data, and provide access to them for the Oclptx routine.
+
+It is worth mentioning that the time taken to initialize data does not factor into our speed computations when we present our results. We make this choice since initialization is done once and only once throughout the lifecycle of the program.
+
+Interpolation
+^^^^^^^^^^^^^
+
+TODO: STEVE
+THIS IS A BASIC OVERVIEW OF YOUR PROCESS. EXPLAIN THE ALGORITHM WE'VE IMPLEMENTED, NO RESULTS. 2-3 PARAGRAPHS MAX.
+
+ALGORITHM PSEUDO-CODE? 
+
+.. _oclptxhandler:
+
+.. figure:: images/oclptxhandler.png
+    :scale: 50 %
+    
+    Workflow of the openCL interaction layer with the GPU.
+    
+
+.. _oclptxdatadiagram:
+
+.. figure:: images/datadiagram.pdf
+
+    Multiple GPU interpolation workflow.
+
+Reduction
+^^^^^^^^^
+
+Reduction and Segmentation optimizes the use of GPU resources. Instead of naively running threads until the last one converges, the code is segmented. A segmentation container holds the maximum number of steps per Kernel, so that all threads in a given Kernel will stop interpolating at the MaxSteps number for that Kernel. In previous implementations, when the Kernel terminates, the thread evaluations consolidated CPU-side, where we determine what paths have been calculated completely. New kernels are launched only for the unfinished paths.
+
+Our task with reduction is to implement a multi-threaded version of this process.
+
+TODO: JEFF
+THIS IS A BASIC OVERVIEW OF YOUR PROCESS. 2-3 PARAGRAPHS MAX. (Feel free to modify what I've written, just filling in what I know and what I salvaged).
+
+
+Results and Analysis
+--------------------
+
+Implementing the aforementioned pipeline, we have arrived at a GPU-based tracking system that can be validated for both correctness as well as speed. The results presented in this section are organized as follows: 
+
+* We first show a deterministic comparison between Oclptx and Probtrackx, proving validity as well as computation speed increase.
+* Next, we show the fully probabilistic result of Oclptx using our custom PRNG routine.
+* Finally, we present our work on multi-threaded reduction. 
+
+We recognize that proving convergence on the probabilistic scenario is necessary to completely prove correctness. While we can produce probablistic results, time did not allow for us to set up the statistical t-tests necessary for validation. Our sponsor has offered to complete this task himself, given that a deterministic match is the critical step.
+
+Deterministic Comparison of Oclptx and Probtrackx
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To test the convergence of our results with expected behaviour, we modified the source code of Probtrackx (ptx2) such that it does not seed randomly. Instead, we forced ptx2 to seed at a predefined location in the brain mask, and we seeded our Oclptx at that same location in the same data set. Hence, by proving that in this deterministic scenario our interpolation algorithm produces exactly the same set of streamlines as the old code, we prove that our algorithm matches the expected results. 
+
+We show these results in :ref:`deterministiccomp`. In this data set, we use 1000 seed points and generated 2000 particles, with a maximum of 2000 steps per path. These parameters give us approximately 4 million points. We then sum over these points to determine the error between the results, :math:`\chi ^ 2`, as follows:
+
+:math:`\chi^2 =  \sum (r^{(1)}_i - r^{(2)}_i)^2  =  O(10^{-11}) \rightarrow  { \langle \chi^2 \rangle } \simeq {O(10^{-13})}`
+
+.. _deterministiccomp:
+
+.. figure:: images/deterministiccomp.pdf
+
+    Deterministic comparison of paths generated by Probtrackx (ptx2) and Oclptx, plotted with Python.
+
+
+Thus, we have a statistcally negligible error. The differences we have can be accounted for if we consider deviations in how the GPU calculates quantities such as sine or cosine. Fundementally, we have shown that the deterministic results of the two pipelines are identical.
+
+Next, we compare the run time of Oclptx against that of ptx2. For a 4000 particle sample dataset, a deterministic run of ptx2 has an average computation time of **43 seconds** from the point of beginning to interpolate to the point of completion. Oclptx, for the same dataset, has an average tracking time of **500-1500 milliseconds**. The following table compares the two algorithms for various particle sizes.
+
+===========  =========  ===========
+Sample Size  Ptx2 Time  Oclptx Time
+===========  =========  ===========
+4000          43s         1000ms
+===========  =========  ===========
+
+    Computation times of Oclptx and Ptx2 compared.
+
+TODO: STEVE This is stuff for you; I wrote to the best of my knowledge and research on our results. You can modify/add as needed. Discuss the significance of the results only within the problem space (not for the greater good of humanity or someshit). NO RECOMMENDATIONS HERE
+
+Probabilistic Results of Oclptx
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TODO STEVE: Describe the results and show the pictures of the biased tracking. I've already stated in the opening that we don't test against the old PTX2 on this step. Here you can expand on what tests NEED to be done by Danny. NO RECOMMENDATIONS HERE
+
+.. _probibilistic1:
+
+.. figure:: images/probibilistic1.pdf
+
+    Caption here as needed
+
+TODO JEFF: PRNG routine. Describe the results, not much of the process. Your ppt slide has a good level of detail for that. NO RECOMMENDATIONS HERE
+
+.. _prng:
+
+.. figure:: images/prng.png
+
+    Caption here as needed
+
+Multi-Threaded Reduction
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+TODO JEFF: If we are at a point to describe integration with Oclptx, then we describe the results of the integration. Focus on Speed and Correctness (compared to the non-multithreaded version). If we are NOT, then the results are the results of your research with collatz. Focus on TEST results. NO RECOMMONDATIONS HERE
+
+

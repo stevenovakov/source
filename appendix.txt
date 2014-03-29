@@ -1,0 +1,11 @@
+Appendix - Command Line Options for Oclptx
+==========================================
+
+The command line interface for Oclptx is nearly identical to that of ptx2. We have, however, implemented some custom code to handle multiple waypoint masks, as well as flags for dumping paths to a file. There are also features that we have not implemented due to time constraints. Here we give a list of options available for use in the command line, along with examples on how to use them.
+
+TODO Afshin
+#. 
+#.
+#.
+
+

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="67cm" height="59cm" viewBox="-320 -532 1327 1171" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="180" y="-120">
+    <tspan x="180" y="-120">GPU Manager Threads</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="560" y="-120">
+    <tspan x="560" y="-120">Reduction Threads</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="420" y="-120">
+    <tspan x="420" y="-120">FIFOs</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="280" y="-120">
+    <tspan x="280" y="-120"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="360" y="-120">
+    <tspan x="360" y="-120"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="340" y="-200">
+    <tspan x="340" y="-200"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="520" y="-60">
+    <tspan x="520" y="-60">     </tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="300" y="-340" width="280" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="300" y="-340" width="280" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-317.1">
+      <tspan x="440" y="-317.1">Load Initial Data Into "reduced" FIFO</tspan>
+    </text>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="442.017" cy="-418.991" rx="42.0174" ry="21.0087"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="442.017" cy="-418.991" rx="42.0174" ry="21.0087"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="442.017" y="-415.091">
+      <tspan x="442.017" y="-415.091">Start</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-321">
+    <tspan x="440" y="-321"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="380" y="-200" width="120" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="380" y="-200" width="120" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-177.1">
+      <tspan x="440" y="-177.1">Fork Threads</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="441.566" y1="-397.077" x2="440.503" y2="-345.424"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="435.664,-353.289 440.457,-343.188 445.662,-353.083 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="-300.99" x2="440" y2="-265.482"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="435,-273.246 440,-263.246 445,-273.246 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="498.359" y1="-161.061" x2="555.768" y2="-141.446"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="546.805,-139.225 557.884,-140.723 550.038,-148.688 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="381.641" y1="-161.061" x2="324.232" y2="-141.446"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="329.962,-148.688 322.116,-140.723 333.195,-139.225 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-50">
+    <tspan x="440" y="-50"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="490" y="-30">
+    <tspan x="490" y="-30"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="340" y="-100" width="184.359" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="340" y="-100" width="184.359" height="40"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="358.436" y1="-100" x2="358.436" y2="-60"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="505.923" y1="-100" x2="505.923" y2="-60"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="432.18" y="-76">
+      <tspan x="432.18" y="-76">&lt;- Reduced Data &lt;-</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="340" y="-40" width="180" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="340" y="-40" width="180" height="40"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="358" y1="-40" x2="358" y2="0"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="502" y1="-40" x2="502" y2="0"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="430" y="-16">
+      <tspan x="430" y="-16">-&gt; Processed Data-&gt;</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="578.966" y="-40" width="179.175" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="578.966" y="-40" width="179.175" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="668.553" y="-16.1">
+      <tspan x="668.553" y="-16.1">Wait for processed data</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="578.966" y="20" width="182.269" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="578.966" y="20" width="182.269" height="40"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="670.1" y="43.9">
+      <tspan x="670.1" y="43.9">Atomically Pop one Entry</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="160" y="-520">
+    <tspan x="160" y="-520">There are two types of threads:  GPU Managers (one per GPU) and Reducers (arbitrarily many).</tspan>
+    <tspan x="160" y="-504">These communicate via FIFOs (which go by many names, eg. message queues, etc)  The main</tspan>
+    <tspan x="160" y="-488">properties needed, in addition to first-in-first-out, are the ability to atomically push and pop entries.</tspan>
+    <tspan x="160" y="-472">Most implementations should have this property (otherwise they would not be very useful!).  A</tspan>
+    <tspan x="160" y="-456">watchdog thread is also a good idea, to detect lockups.</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="578.966" y="140" width="182.069" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="578.966" y="140" width="182.069" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="670" y="162.9">
+      <tspan x="670" y="162.9">For each Particle in Entry</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="670" y="159">
+    <tspan x="670" y="159"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="858.966" y="159">
+    <tspan x="858.966" y="159"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="540" y="200">
+    <tspan x="540" y="200"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="670" y="263.366">
+    <tspan x="670" y="263.366"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="858.966" y="159">
+    <tspan x="858.966" y="159"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="670" y="159">
+    <tspan x="670" y="159"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="600" y="200" width="181.225" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="600" y="200" width="181.225" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="690.612" y="222.9">
+      <tspan x="690.612" y="222.9">Check if Path Terminated</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="651.063,260 702.126,285.532 651.063,311.063 600,285.532 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="651.063,260 702.126,285.532 651.063,311.063 600,285.532 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="651.063" y="289.432">
+      <tspan x="651.063" y="289.432"></tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="680" y="340">
+    <tspan x="680" y="340"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="600" y="340" width="180" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="600" y="340" width="180" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="690" y="362.9">
+      <tspan x="690" y="362.9">Add to "reduced" buffer</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="680" y="380">
+    <tspan x="680" y="380"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="690" y="359">
+    <tspan x="690" y="359"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="578.966" y="80" width="174.888" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="578.966" y="80" width="174.888" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="666.41" y="102.9">
+      <tspan x="666.41" y="102.9">Create "reduced" buffer</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="690" y="359">
+    <tspan x="690" y="359"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="690" y="359">
+    <tspan x="690" y="359"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="560" y="-100" width="164.869" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="560" y="-100" width="164.869" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="642.434" y="-77.1">
+      <tspan x="642.434" y="-77.1">Create "output" buffer</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="864.85" y="287">
+    <tspan x="864.85" y="287"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="760" y="260" width="245.1" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="760" y="260" width="245.1" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="882.55" y="282.9">
+      <tspan x="882.55" y="282.9">Determine Cause.  Add to "output"</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="701.277" y1="284.115" x2="754.53" y2="282.612"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="746.91,287.829 756.765,282.549 746.628,277.833 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="688" y="272">
+    <tspan x="688" y="272">Terminated</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="662.176" y1="306.5" x2="677.316" y2="335.067"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="669.262,330.548 678.363,337.043 678.098,325.866 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="690" y="359">
+    <tspan x="690" y="359"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="564" y="328">
+    <tspan x="564" y="328">Not Terminated</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="700" y="-440">
+    <tspan x="700" y="-440"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="740" y="-380">
+    <tspan x="740" y="-380"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="520" y="-420">
+    <tspan x="520" y="-420"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="600" y="400" width="103.2" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="600" y="400" width="103.2" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="651.6" y="422.9">
+      <tspan x="651.6" y="422.9">Next Particle</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="560" y1="160" x2="573.488" y2="159.877"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="565.77,164.948 575.724,159.857 565.679,154.948 "/>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="598.996" y1="419.574" x2="560" y2="420"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="560" y1="420" x2="560" y2="160"/>
+  <g>
+    <rect style="fill: #ffffff" x="600" y="460" width="340.269" height="54"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="600" y="460" width="340.269" height="54"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="770.134" y="482.9">
+      <tspan x="770.134" y="482.9">End of Particles.  Push pointer to "reduced"</tspan>
+      <tspan x="770.134" y="498.9">buffer into FIFO, include its size.</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="340" y="20" width="180.062" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="340" y="20" width="180.062" height="40"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="358.006" y1="20" x2="358.006" y2="60"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="502.056" y1="20" x2="502.056" y2="60"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="430.031" y="44">
+      <tspan x="430.031" y="44">&lt;- -&gt;Leftover Data</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="600" y="540" width="172.556" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="600" y="540" width="172.556" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="686.278" y="562.9">
+      <tspan x="686.278" y="562.9">Free "processed" buffer</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="600" y="600" width="137.95" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="600" y="600" width="137.95" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="668.975" y="622.9">
+      <tspan x="668.975" y="622.9">Wait for new data</tspan>
+    </text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="599.001" y1="619.543" x2="540" y2="620"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="540" y1="620" x2="540" y2="-20"/>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="540" y1="-20" x2="574.494" y2="-20"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="566.73,-15 576.73,-20 566.73,-25 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-321">
+    <tspan x="440" y="-321"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="-260" width="240" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="-260" width="240" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-237.1">
+      <tspan x="440" y="-237.1">GPU Init.  Transfer static data</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="440" y="-241">
+    <tspan x="440" y="-241"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="-100" width="253.225" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="-100" width="253.225" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="186.612" y="-77.1">
+      <tspan x="186.612" y="-77.1">Check for "leftover" data</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="186.612" y="-81">
+    <tspan x="186.612" y="-81"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="-40" width="172.85" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="-40" width="172.85" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="146.425" y="-17.1">
+      <tspan x="146.425" y="-17.1">Wait for "reduced" data</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="-320" y="-100">
+    <tspan x="-320" y="-100">Note: There's a case for starvation here.</tspan>
+    <tspan x="-320" y="-84">Need to work out how to handle "not enough</tspan>
+    <tspan x="-320" y="-68">data".  Either wait---which has the potential</tspan>
+    <tspan x="-320" y="-52">to cause deadlock, or "just go", which means</tspan>
+    <tspan x="-320" y="-36">that if the reducer is too slow, the GPU will</tspan>
+    <tspan x="-320" y="-20">not be fully loaded.  The latter case is OK as it</tspan>
+    <tspan x="-320" y="-4">implies that reduction is our system bottleneck.</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="220" y="-60">
+    <tspan x="220" y="-60"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="20" width="182.269" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="20" width="182.269" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="151.134" y="42.9">
+      <tspan x="151.134" y="42.9">Atomically Pop one Entry</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="80" y="80" width="250.425" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="80" y="80" width="250.425" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="205.213" y="102.9">
+      <tspan x="205.213" y="102.9">Load its associated data to the GPU</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="80" y="140" width="248.569" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="80" y="140" width="248.569" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="204.284" y="162.9">
+      <tspan x="204.284" y="162.9">Do we still have room for particles?</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="200.213,200 240.426,220.107 200.213,240.213 160,220.107 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="200.213,200 240.426,220.107 200.213,240.213 160,220.107 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="200.213" y="224.007">
+      <tspan x="200.213" y="224.007"></tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="159" y1="220.079" x2="44.4721" y2="220.003"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="52.2394,215.008 42.2361,220.001 52.2327,225.008 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="40" y1="220" x2="40" y2="44.4721"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="45,52.2361 40,42.2361 35,52.2361 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="40" y1="40" x2="54.575" y2="39.8689"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="46.8564,44.9385 56.811,39.8487 46.7664,34.9389 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="320" width="240" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="320" width="240" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="180" y="342.9">
+      <tspan x="180" y="342.9">Kickoff GPU Path Processing</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="380" width="240" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="380" width="240" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="180" y="402.9">
+      <tspan x="180" y="402.9">Wait for completion</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="440" width="271.594" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="440" width="271.594" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="195.797" y="462.9">
+      <tspan x="195.797" y="462.9">Pull data off GPU into "processed" FIFO</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="200" y="420">
+    <tspan x="200" y="420"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="260" width="318.481" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="260" width="318.481" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="219.241" y="282.9">
+      <tspan x="219.241" y="282.9">Store remaining particle refs in "leftover" FIFO</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="432.18" y="-80">
+    <tspan x="432.18" y="-80"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="60" y="500" width="106.025" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="60" y="500" width="106.025" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="113.012" y="522.9">
+      <tspan x="113.012" y="522.9">Next Dataset</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="59.0012" y1="519.581" x2="24.4719" y2="519.952"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="32.1816,514.869 22.2359,519.976 32.2891,524.868 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="20" y1="520" x2="20" y2="-75.5279"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="25,-67.7639 20,-77.7639 15,-67.7639 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="20" y1="-80" x2="54.5269" y2="-80.2072"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="46.7931,-75.1607 56.7629,-80.2206 46.7331,-85.1605 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="440" y1="-221.005" x2="440" y2="-205.467"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="435,-213.231 440,-203.231 445,-213.231 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="650.801" y1="-61.4609" x2="657.799" y2="-45.1171"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="650.146,-50.2862 658.679,-43.0615 659.339,-54.2224 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="669.095" y1="0.991211" x2="669.444" y2="14.5381"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="664.245,6.90565 669.502,16.7735 674.242,6.64792 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="668.788" y1="60.9871" x2="667.94" y2="74.5362"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="663.434,66.4753 667.8,76.7679 673.415,67.0996 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="667.606" y1="118.995" x2="668.537" y2="134.541"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="663.082,127.089 668.67,136.773 673.064,126.492 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="676.869" y1="178.995" x2="682.29" y2="194.775"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="675.039,189.057 683.017,196.89 684.497,185.808 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="678.794" y1="238.882" x2="665.495" y2="261.254"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="665.164,252.025 664.353,263.176 673.76,257.135 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="677.203" y1="378.995" x2="666.808" y2="395.238"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="666.781,386.004 665.602,397.122 675.204,391.394 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="870.851" y1="298.983" x2="802.26" y2="416.141"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="801.867,406.914 801.13,418.07 810.497,411.967 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="800" y1="420" x2="708.606" y2="419.384"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="716.404,414.437 706.37,419.369 716.336,424.436 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="686.457" y1="438.997" x2="717.45" y2="456.776"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="708.227,457.25 719.389,457.889 713.203,448.576 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="737.521" y1="515.002" x2="712.949" y2="536.1"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="715.582,527.249 711.252,537.557 722.096,534.836 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="680.512" y1="578.995" x2="675.98" y2="594.708"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="673.328,585.862 675.361,596.856 682.936,588.633 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="173.22" y1="-61.0049" x2="162.306" y2="-44.7108"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="162.473,-53.9439 161.062,-42.853 170.781,-48.379 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="147.994" y1="-1.00488" x2="149.215" y2="14.5465"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="143.623,7.19758 149.39,16.7757 153.592,6.41509 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="169.156" y1="58.9951" x2="184.197" y2="75.6829"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="175.285,73.2633 185.694,77.3439 182.713,66.5683 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="204.903" y1="118.995" x2="204.663" y2="134.533"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="199.784,126.693 204.628,136.769 209.782,126.848 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="202.952" y1="178.998" x2="201.871" y2="195.221"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="197.398,187.142 201.723,197.452 207.376,187.806 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="206.048" y1="238.166" x2="211.437" y2="254.845"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="204.292,248.994 212.124,256.973 213.807,245.92 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="206.164" y1="298.995" x2="195.525" y2="315.262"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="195.59,306.028 194.301,317.134 203.959,311.501 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="180" y1="358.995" x2="180" y2="374.533"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="175,366.769 180,376.769 185,366.769 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="185.264" y1="418.995" x2="189.394" y2="434.68"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="182.582,428.445 189.963,436.843 192.252,425.899 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="168.209" y1="478.995" x2="144.222" y2="496.38"/>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="147.574,487.776 142.411,497.693 153.442,495.873 "/>
+  </g>
+</svg>

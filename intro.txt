@@ -1,0 +1,64 @@
+Introduction
+============
+
+CFRI, at BC Children's Hospital/Women's Hospital & Health Care Centre has expressed a desire to improve an MRI-based diagnostics routine that maps neuron connectivity in patients. This routine is used to guide surgical and pharmacological treatment, and is considered a valuable resource by the institute. The current open-source implementation of the ancillary computation software, encapsulated in the FSL software suite, takes anywhere from one to five days of computation time on common laboratory workstations. CFRI researchers Dr. Bruce Bjornson and Mr. Daniel Kim, have expressed a desire for work to be done on a parallelized, GPU based version of this software in order to reduce the computation time to more useful timeframes. There has been some precedent work on this concept, though, as of yet, none of it has been made available to the relevant open-source communities.
+
+Diffusion Tensor Imaging
+------------------------
+
+Diffusion tensor imaging (DTI or dMRI) is a relatively new field, applicable for the study and treatment of neurological disorders.  MRI allows us to acquire an image of the both the tissue density and fluid diffusion direction within a human brain [hernandez13]_ .  In neural white matter, water diffuses primarily in the direction of neural fibres [hernandez13]_ .  Extracting accurate diffusion paths from the DTI data can macroscopically indicate particular neuron fibre paths between various neural regions. There are a few points of interest worth mentioning:
+
+.. [hernandez13] Hernández, M., Guerrero, G. D., Cecilia, J. M., García, J. M., Inuggi, A., Jbabdi, S., … Sotiropoulos, S. N. (2013). Accelerating fibre orientation estimation from diffusion weighted magnetic resonance imaging using GPUs. PloS one, 8(4), e61892. doi:10.1371/journal.pone.0061892
+
+dMRI measures the ease of water flow.  Water can flow more easily in the direction/orientation of macroscopic structures of neurons than against them.
+The voxel size (mm) is signifcantly larger than the actual thickness of neuron fibres (um), and therefore there are many fibre paths within one resolved voxel.
+
+It should be highlighted that it is macro-structure dynamics and not individual fiber paths which are being estimated.
+
+DTI Analysis
+------------
+
+Probabilistic Tractography (PT) is an analysis method which attempts to find neural pathways given a set of DTI data. There are two steps of PT:
+
+* Local Parameter Estimation
+* Global Connectivity Estimation
+
+both of which are implemented as a CPU based module and distributed with FSL. The first step takes on the order of a day for a reasonably sized data set.  The second step takes a similar amount of time. The computation time hampers result turnover due to the delay from the time the patient is screened. 
+
+Local Parameter Estimation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Local parameter estimation primarily deals with the creation of a stochastic diffusion map of the scanned volume by extracting a probability distribution function (pdf) of flow amplitude and orientation, most commonly in spherical coordinates (so :math:`p = p(F, \phi, \theta)` ). Because a finite number of orientations are scanned during the DTI sequence, the exact flow direction at a particular point can be represented by some distribution derived from the composite diffusion data.  
+
+In FSL, the local parameter estimation module is known as bedpostx. Up until November 2013, when a CUDA port was completed by the FSL team, this had been an exclusively CPU-based algorithm. The CPU-based bedpostx took as long as 1-5 days to complete processing of a large data set on a modern processor. Mr. Kim of CFRI had previously completed a CUDA port before the FSL team which has been in use at CFRI since the 2013 summer and has achieved ~18x speedup.  This module provides estimates of multiple fibre directions at each voxel, based off of the given diffusion data.  If there are two dominant fibre orientations, it will give a direction for each. The output data is essentially N diffusion tensors: volumes which contains a vector at each point which indicates the diffusion direction and an additional anisotropy parameter.  It creates one such volume for each fibre. This port has also been done in the literature:  Mo Xu et al accomplished a 34x speedup of the parameter estimation step.
+
+Global Connectivity Estimation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The scope of our project focuses on implementing the Global Connectivity Estimation step in a SIMD pipeline. The implemention included with FSL is named probtrackx; in our project, we name it oclptx. Essentially, the functionality of the module, for a single seed can be summarized as follows: 
+
+* Drop an imaginary particle into the mesh space at a user-selected point.
+* Simulate a step-by-step “flow” of that particle along neural fiber distribution found in the local parameter estimation step.
+* Add up paths of a large number of fibers.
+* Probabalistic: do not stop if it encounters poor diffusion data, continue going, even though results may diverge, though there are user options to limit the divergence.
+
+The connectivity estimation stage has been attempted by Mo Xu et al. with a 50x improvement, though the results of that have not been open sourced.
+
+
+GPU Architecture
+----------------
+
+Modern GPU hardware contains a highly parallel processing architecture.  For example, a low-end consumer GPU now has 448 cores, (one thread per core). In the scope of PT:
+
+* There is potential for major improvements in processing speed, very high performance/cost.
+* Requires careful architecture due to restrictive arch: memory usage, processing breakdown, and communication pathways are all crucial to effective design.
+* GPUs execute algorithms in a topology which allows for parallel execution of a single instruction (SIMD). 
+
+The drawback of this architecture is that in a naïve implementation (all threads run to termination), the running time of all the threads in a single execution block is that of the slowest thread. Therefore, if the lengths of the brain fibers vary significantly, there will be wasted GPU resources. Unless there is some oversight from the host software, the threads that compute the interpolation for the shorter fibers finish first, and these threads remain idle until the longest fiber lengths are computed.
+
+The goal of this project is to convert the old Probtrackx algorithm into a functional GPU port that is well integrated with FSL. Additionally, it would be beneficial to explore further optimizations and benchmark them appropriately. 
+
+The rest of this report is organized as follows
+*
+*
+*

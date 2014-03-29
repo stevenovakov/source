@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3941"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="pathing.svg">
+  <defs
+     id="defs3943">
+    <marker
+       inkscape:stockid="DotM"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="DotM"
+       style="overflow:visible">
+      <path
+         id="path4005"
+         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.4) translate(7.4, 1)" />
+    </marker>
+    <marker
+       inkscape:stockid="DotS"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="DotS"
+       style="overflow:visible">
+      <path
+         id="path4008"
+         d="M -2.5,-1.0 C -2.5,1.7600000 -4.7400000,4.0 -7.5,4.0 C -10.260000,4.0 -12.5,1.7600000 -12.5,-1.0 C -12.5,-3.7600000 -10.260000,-6.0 -7.5,-6.0 C -4.7400000,-6.0 -2.5,-3.7600000 -2.5,-1.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.2) translate(7.4, 1)" />
+    </marker>
+    <marker
+       inkscape:stockid="StopL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="StopL"
+       style="overflow:visible">
+      <path
+         id="path4924"
+         d="M 0.0,5.65 L 0.0,-5.65"
+         style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="DistanceStart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="DistanceStart">
+      <g
+         id="g2300">
+        <path
+           style="fill:none;stroke:#ffffff;stroke-width:1.15;stroke-linecap:square"
+           d="M 0,0 L 2,0"
+           id="path2306" />
+        <path
+           style="fill:#000000;fill-rule:evenodd;stroke:none"
+           d="M 0,0 L 13,4 L 9,0 13,-4 L 0,0 z "
+           id="path2302" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square"
+           d="M 0,-4 L 0,40"
+           id="path2304" />
+      </g>
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="251.00149"
+     inkscape:cy="774.68155"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1007"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3955"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3946">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,104.48401 0,250"
+       id="path3957"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176.67006,104.48401 0,250"
+       id="path3959"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 226.67006,104.48401 0,250"
+       id="path3961"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 276.67006,104.48401 0,250"
+       id="path3963"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 326.67006,104.48401 0,250"
+       id="path3965"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 376.67006,104.48401 0,250"
+       id="path3967"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,104.48401 249.99999,0"
+       id="path3969"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,154.48401 249.99999,0"
+       id="path3971"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,204.48401 249.99999,0"
+       id="path3973"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,254.48401 249.99999,0"
+       id="path3975"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,304.48401 249.99999,0"
+       id="path3977"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 126.67007,354.48401 249.99999,0"
+       id="path3979"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="266.67007"
+       y="74.484009"
+       id="text3981"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         id="tspan3983"
+         x="266.67007"
+         y="74.484009">Voxels.  Typically ~2mm</tspan></text>
+    <g
+       id="g3989"
+       transform="translate(-13.329928,2.1218305)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3985"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path3987"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g3993"
+       transform="matrix(0.91021868,0.41412795,-0.41412795,0.91021868,91.630494,-46.66587)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path3995"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path3997"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.9838699,-0.1788855,0.1788855,0.9838699,70.617176,29.531199)"
+       id="g3999"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4001"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4003"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4005"
+       transform="matrix(0.98586047,0.1675683,-0.1675683,0.98586047,155.08797,-19.176092)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4007"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4009"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.70516685,0.7090414,-0.7090414,0.70516685,299.81144,-66.964201)"
+       id="g4011"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4013"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4015"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4017"
+       transform="matrix(0.54176388,0.84053073,-0.84053073,0.54176388,385.4331,-68.646421)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4019"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4021"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(-0.49638774,-0.86810092,0.86810092,-0.49638774,356.58935,326.11519)"
+       id="g4023"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4025"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4027"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4029"
+       transform="matrix(-0.66961086,-0.74271212,0.74271212,-0.66961086,345.10423,327.00654)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4031"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4033"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.97014251,-0.24253559,0.24253559,0.97014251,116.02364,89.847377)"
+       id="g4035"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4037"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4039"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4041"
+       transform="matrix(0.56287714,0.82654058,-0.82654058,0.56287714,233.18804,-18.849)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4043"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4045"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.86469984,-0.50228895,0.50228895,0.86469984,3.4824114,137.00619)"
+       id="g4047"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4049"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4051"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4053"
+       transform="matrix(0.99236389,-0.12334466,0.12334466,0.99236389,-24.886707,70.171733)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4055"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4057"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.72318669,0.6906526,-0.6906526,0.72318669,95.406354,35.194252)"
+       id="g4059"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4061"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4063"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4065"
+       transform="translate(35.955781,102.83611)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4067"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4069"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       id="g5990"
+       transform="translate(66.670068,12.121831)"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4073"
+         d="m 165.51522,196.00576 -13.17329,-5.14433"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4075"
+         d="m 162.59164,199.05338 -7.32613,-11.23957"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path5605"
+       d="m 162.82114,346.70472 10.99953,-19.4682"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#StopL);marker-end:url(#StopL)"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       transform="matrix(-0.86116826,0.50831999,-0.50831999,-0.86116826,349.98064,371.47026)"
+       id="g4191"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4193"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4195"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text5981"
+       y="374.60846"
+       x="130.57048"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       transform="matrix(0.99996429,-0.00845152,0.00845152,0.99996429,0,0)"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         y="374.60846"
+         x="130.57048"
+         id="tspan5983"
+         sodipodi:role="line">Step length.</tspan><tspan
+         y="389.60846"
+         x="130.57048"
+         sodipodi:role="line"
+         id="tspan5994">Typically ~.5mm</tspan></text>
+    <g
+       id="g4077"
+       transform="matrix(0.89218558,-0.45166901,0.45166901,0.89218558,105.53025,177.10589)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4079"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4081"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(-0.16493381,0.98630464,-0.98630464,-0.16493381,450.72108,83.998628)"
+       id="g4083"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4085"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4087"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4089"
+       transform="matrix(0.17123006,0.98523107,-0.98523107,0.17123006,452.83395,49.73846)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4091"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4093"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4221"
+       d="m 126.67006,339.48401 25,0"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g5599"
+       transform="translate(62.124381,6.0609148)"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4097"
+         d="m 311.02022,253.92124 7.95955,-11.68955"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4099"
+         d="m 308.48309,249.66704 13.03381,-3.18116"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4203"
+       y="114.48401"
+       x="406.67007"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         y="114.48401"
+         x="406.67007"
+         id="tspan4205"
+         sodipodi:role="line">Fibres (input)</tspan><tspan
+         id="tspan4207"
+         y="129.48402"
+         x="406.67007"
+         sodipodi:role="line">Fibre directions, with error bars as determined</tspan><tspan
+         id="tspan4209"
+         y="144.48401"
+         x="406.67007"
+         sodipodi:role="line">by a previous program.  Multiple directions</tspan><tspan
+         id="tspan4211"
+         y="159.48401"
+         x="406.67007"
+         sodipodi:role="line">correspond to different structures identified</tspan><tspan
+         id="tspan4213"
+         y="174.48401"
+         x="406.67007"
+         sodipodi:role="line">in the same area.</tspan></text>
+    <path
+       transform="matrix(0.50892858,0,0,0.50892858,113.90221,172.56755)"
+       d="m 80,327.36218 a 5,5 0 1 1 -10,0 5,5 0 1 1 10,0 z"
+       sodipodi:ry="5"
+       sodipodi:rx="5"
+       sodipodi:cy="327.36218"
+       sodipodi:cx="75"
+       id="path4215"
+       style="fill:#008000;stroke:none"
+       sodipodi:type="arc"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4217"
+       y="345.55545"
+       x="65.241493"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         y="345.55545"
+         x="65.241493"
+         id="tspan4219"
+         sodipodi:role="line">Particle</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4223"
+       y="274.50504"
+       x="337.85715"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         y="274.50504"
+         x="337.85715"
+         id="tspan4225"
+         sodipodi:role="line" /></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4241"
+       d="m 377.27411,89.027146 -50,-5e-6"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#StopL);marker-end:url(#StopL)"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g4101"
+       transform="translate(187.38434,152.12182)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4103"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4105"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="translate(135.95578,152.83611)"
+       id="g4107"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4109"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4111"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4113"
+       transform="matrix(-0.4319164,0.90191365,-0.90191365,-0.4319164,378.74592,173.14229)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4115"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4117"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.90542668,0.42450267,-0.42450267,0.90542668,94.077634,102.37218)"
+       id="g4119"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4121"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4123"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4125"
+       transform="matrix(0.7201044,0.69386573,-0.69386573,0.7201044,96.881064,84.345633)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4127"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4129"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(-0.99990509,0.0137774,-0.0137774,-0.99990509,268.78134,406.33621)"
+       id="g4131"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4133"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4135"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4137"
+       transform="matrix(0.99585033,-0.09100608,0.09100608,0.99585033,28.649724,216.00173)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4139"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4141"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.9737823,0.22748192,-0.22748192,0.9737823,114.34037,172.95805)"
+       id="g4143"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4145"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4147"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4149"
+       transform="matrix(0.44269639,0.89667157,-0.89667157,0.44269639,306.47781,134.3489)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4151"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4153"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(-0.50282521,-0.86438811,0.86438811,-0.50282521,309.29922,477.68291)"
+       id="g4155"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4157"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4159"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4161"
+       transform="translate(236.67005,202.12182)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4163"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134.31522,98.800825 11.36956,7.122715"
+         id="path4165"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.4530818,0.89146894,-0.89146894,0.4530818,404.4913,183.29991)"
+       id="g4167"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4169"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4171"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4173"
+       transform="matrix(0.99771338,-0.06758709,0.06758709,0.99771338,180.78611,261.10379)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4175"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4177"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       transform="matrix(0.3278511,0.94472941,-0.94472941,0.3278511,328.18975,188.66233)"
+       id="g4179"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4181"
+         d="m 135,107.36218 10,-9.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path4183"
+         d="m 134,105.36218 12,-5.999997"
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4185"
+       transform="matrix(0.87806329,-0.12426934,-0.47854452,1.2065969,153.44035,248.37183)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4187"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4189"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       id="g4197"
+       transform="matrix(0.14591411,0.98929726,-0.98929726,0.14591411,208.22299,200.33201)"
+       style="fill:none;stroke:#ff0000"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 135,107.36218 10,-9.999997"
+         id="path4199"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 134,105.36218 12,-5.999997"
+         id="path4201"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <path
+       style="fill:none;stroke:#800080;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-mid:url(#DotM)"
+       d="m 151.67006,339.48401 15,-20 20,-10 20,-5 20,-10 15,-15 5,-15 5,-15 -5,-20 -15,-10 -20,-5 -15,-15 -10,-20 5,-20 5,-20 -15,-15 -20,0 -15,15 -15,20 -20,10"
+       id="path5603"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="406.67007"
+       y="204.48402"
+       id="text6015"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         id="tspan6017"
+         x="406.67007"
+         y="204.48402">1.  An adjacent corner is selected, at random</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="219.48402"
+         id="tspan6025">(proportional to distance)</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="234.48402"
+         id="tspan6019">2.  A direction is selected from that corner out of</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="249.48402"
+         id="tspan6027">the available choices.  Many options to do this,</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="264.48401"
+         id="tspan6029">determined by the user at start time.  These</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="279.48401"
+         id="tspan6031">include: prefer one direction, randomly,</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="294.48401"
+         id="tspan6033">proportional to error bars, and full-out random.</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="309.48401"
+         id="tspan6021">3.  The particle jumps a fixed distance in the</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="324.48401"
+         id="tspan6035">direction of the chosen fibre.  The vector is</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="339.48401"
+         id="tspan6037">reversed if needed to keep the angle of motion</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="354.48401"
+         id="tspan6039">under a preset value.</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="369.48401"
+         id="tspan6023">4.  This process is repeated until the particle hits</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="384.48401"
+         id="tspan6041">a region of the brain which has been selected as</tspan><tspan
+         sodipodi:role="line"
+         x="406.67007"
+         y="399.48401"
+         id="tspan6043">a &quot;stop condition&quot;.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#800080;fill-opacity:1;stroke:none;font-family:Sans"
+       x="57.384354"
+       y="190.1983"
+       id="text3145"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/media/STORAGE_1/Documents/Dropbox/ENPH 459/pathing.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         id="tspan3147"
+         x="57.384354"
+         y="190.1983">Generated</tspan><tspan
+         sodipodi:role="line"
+         x="57.384354"
+         y="205.1983"
+         id="tspan3149">Path</tspan></text>
+  </g>
+</svg>
