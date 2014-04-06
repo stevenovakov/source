@@ -116,11 +116,13 @@ Once a particle is loaded into VRAM, and the maximum number of steps per kernel 
 #.  Sample Selection - Random selection of BedpostX parameter sample set. This is simply the mod (num_samples) of the 64 bit rng value.
 
 #.  Stepping - (mention euler and improved euler here)
+
     #. Anisotropic Constraint (optional)- Implemented in the same way as in Streamline::Streamline. If the FA value selected is less than some rng in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. This particle will still be included in the output pdf.
     #. Standard (Euler) Interpolation (mandatory)- sadfsdf
     #. Improved Euler Interpolation (optional) - Same as above but (include formula). Mention that the final step direction is normalised
 
 #.  Masks / Termination - masks that are checked
+
     #. Brain Mask (mandatory)
     #. Exclusion Mask (optional)
     #. Termination Mask (optional)
@@ -128,6 +130,7 @@ Once a particle is loaded into VRAM, and the maximum number of steps per kernel 
     #. Curvature Threshold (mandatory) - After every FINAL NORMALIZED dr is termined.
 
 #.  Update Output Data - pdf and, if --savepaths, particle paths.
+
     #. Particle Pdf Update
     #. Particle path update (optional)
 
@@ -144,6 +147,7 @@ Each thread operates on a size 32 section of the voxel space and sums the indivi
 Operations (for each particle):
 
 #.  Check Inclusion Conditions
+
     #. Termination - If the particle has terminated, the termination code has an integer value > 0. Only these are ever considered for summing.
     #. Waypoint - wayand  vs wayor, if not meet all of them, temrinate
     #. Exclusion - If the termination code is > 0, and not any of: BREAK_INIT, BREAK_INVALID, STILL_FINISHED
