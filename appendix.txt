@@ -52,4 +52,12 @@ It is worthwhile to note that if any of the options are inputed incorrectly, the
 In this case, oclptx will run without any of the other options following --sampvox (ie: --savepaths, -m, -x, etc).
 
 
+Installation Instructions
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Maybe this should go before the CLI? This will be brief and will assume reader has installed FSL before.
+
+Shall include here suggested changes to depend.mk as well as any environment variables we must export to. (LIBOPENCL, OCLINCLUDE, etc)
+
+
 
