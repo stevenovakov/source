@@ -9,9 +9,9 @@ Algorithmic Theory
 The tracking algorithm follows the following routine:
 
 #. Load multiple sets of fiber parameters created by the bedpostx step (:math:`F, \phi, \theta`). These parameters are the anisotropy and vector field parameters, respectively.
-#. Repeatedly drop imaginary “particles” into the space of the brain. In this step, the algorithm treats the estimated fiber directions as flow directions.  
-#. Step through the brain via the flow directions, a fixed distance at a time, until it some stopping conditionv is reached. The stopping condition is typically a user-defined mask. 
-  
+#. Repeatedly drop imaginary “particles” into the space of the brain. In this step, the algorithm treats the estimated fiber directions as flow directions.
+#. Step through the brain via the flow directions, a fixed distance at a time, until it some stopping conditionv is reached. The stopping condition is typically a user-defined mask.
+
 The location of particles is determined by user-defined seeds. Seeds can be defined individual in text-format, or as a series of volumes and surfaces which the program automatically iterates through. For each seed, many particles are instantiated. Each particle begins at a random location within a sphere of its seed point. Paths are then interpolated from this starting location, using the fiber distribution. Since the particle does not have an initial direction to help it decide which way to follow the first non-directional fibre, typically it will be run twice---once in each direction. The relation between seeds, particles, and paths is shown in Figure 3.1.
 
 .. _particle:
@@ -41,11 +41,12 @@ Our Oclptx fits in as a seperate module in the FSL suite (Figure 3.3). The inten
 
 Within Oclptx, we architect our code around three steps in the pipeline: Initialization, Interpolation, and Reduction (Figure 3.4).
 
-.. _oclptx:
+..
+  .. _oclptx:
 
-.. figure:: images/oclptx.pdf
+  .. figure:: images/oclptx.pdf
 
-  Block diagram of the Oclptx pipeline. The :math:`F, \phi, \theta` parameters are read in via the initialization step, and then passed into the GPU interpolation and reduction scheme.
+    Block diagram of the Oclptx pipeline. The :math:`F, \phi, \theta` parameters are read in via the initialization step, and then passed into the GPU interpolation and reduction scheme. Outdated. fix.
 
 Initialization
 ^^^^^^^^^^^^^^
@@ -74,13 +75,14 @@ Out of all of these, the largest data to allocate by far is the diffusion parame
 Note: it is up to the user to ensure that their data will fit on the device.
 
 During development, 16-bit fixed point encoding was attempted on the BedpostX data to compress it and lower memory requirements. FA data was encoded as 1:15, Phi data was encoded as 3:13 and theta data was encoded as 2:14 (bits before decimal : bits after decimal). Subsequent testing revealed a significant divergence from the deterministic ptx2 results, the total mean-square error of the test set went up by a factor of 10^4. As the main goal was to provide a precise, functionally equivalent port for CFRI, this functionality was shelved. However, should users run into severe memory limitations, this may be an acceptable solution.
+..
 
-.. _oclptxhandler:
+  .. _oclptxhandler:
 
-.. figure:: images/oclptxhandler.png
-    :scale: 50 %
+  .. figure:: images/oclptxhandler.png
+      :scale: 50 %
 
-    Make this a block diagram of OclEnv. Redo later.
+      Make this a block diagram of OclEnv. Redo later.
 
 After static data containers are allocated and synchronized by the OclEnv class, the remaining GPU memory is determined, in bytes, and that value is sent to OclPtxHandler, (mention something about memory risk fraction, etc). OclPtxHandler then determines, based on user-specified options, how much memory needs to be allocated per particle, and then simply maximizes the number of particles that will fit in the remaining memory. The following containers are allocated *per particle*:
 
@@ -116,48 +118,57 @@ Interpolation on the GPU is done on a per-particle basis. Each thread processes 
 
 Once a particle is loaded into VRAM, and the maximum number of steps per kernel run are specified, probabilistic tracking proceeds in the following manner:
 
-#.  Volume Fraction Criterion - the floor() of the current particle position is designated as the "root" vertex in the voxel space. In each direction, an rng is generated in the range [0, 1.0]. If the particle position, subtracting the root vertex is greater than this rng value in a particular dimension, that dimension is incremented by 1 in the vertex space. This method biases particle selection towards the closest vertex, while still allowing for selection of the farther vertices in the voxel. The incremented vertex is referred to as the "select vertex".
+#.  **Volume Fraction Criterion** - the floor() of the current particle position is designated as the "root" vertex in the voxel space. In each direction, an rng is generated in the range [0, 1.0]. If the particle position, subtracting the root vertex is greater than this rng value in a particular dimension, that dimension is incremented by 1 in the vertex space. This method biases particle selection towards the closest vertex, while still allowing for selection of the farther vertices in the voxel. The incremented vertex is referred to as the "select vertex".
 
-#.  Sample Selection - Random selection of BedpostX parameter sample set. This is simply the mod (num_samples) of the 64 bit rng value.
+#.  **Sample Selection** - Random selection of BedpostX parameter sample set. This is simply the mod (num_samples) of the 64 bit rng value.
 
-#.  Stepping - (mention euler and improved euler here)
+#.  **Stepping** - In general, the individual particle stepping mirrors the particle::jump method from ptx2. When a sample is selected, the new jump direction is aligned with the previous jump direction, to reduce erratic pathing, (does not make sense from a biological perspective).
 
-    #. Anisotropic Constraint (optional)- Implemented in the same way as in Streamline::Streamline. If the FA value selected is less than some rng in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. This particle will still be included in the output pdf.
-    #. Standard (Euler) Interpolation (mandatory)- sadfsdf
-    #. Improved Euler Interpolation (optional) - Same as above but (include formula). Mention that the final step direction is normalised
+    #. **Anisotropic Constraint** (optional)- Implemented in the same way as in Streamline::Streamline. If the FA value selected is less than some rng in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. This particle will still be included in the output pdf.
+    #. **Standard (Euler) Interpolation** (mandatory)- The standard interpolation is done with the simple euler method
 
-#.  Masks / Termination - masks that are checked
+    .. math::
+      Y_{n+1} = Y_n + h \cdot F (Y_n) \quad  | \quad F(Y) = \dot{Y}
+    where h is the user specified step length parameter. F(Y) returns a unit vector with orientation specified by the particular BedpostX parameter samples.
+    #. **Improved Euler Interpolation** (optional) - If desired, the user can specify a more precise method of interpolation: Improved/Modified Euler, (aka Runge-Kutta 2). This is a two-step method which interpolates as follows:
 
-    #. Brain Mask (mandatory)
-    #. Exclusion Mask (optional)
-    #. Termination Mask (optional)
-    #. Waypoint Mask(s) (optional)
-    #. Curvature Threshold (mandatory) - After every FINAL NORMALIZED dr is termined.
+    .. math::
+      Y_{n+1}^\star = Y_n + h \cdot F (Y_n)
 
-#.  Update Output Data - pdf and, if --savepaths, particle paths.
+      Y_{n+1}= Y_{n} + \frac{h}{2}(F(Y_n) + F(Y_{n+1}^\star)
+    This method generally produces less erattic results and is more stable.
 
-    #. Particle Pdf Update
-    #. Particle path update (optional)
+Regardless of the options, the resultant :math:`Y_{n+1}` is added to the old particle position and stored as as temporary position, to be evaluated futher. (indentation is fucked here, figure it out later)
 
-If, at the end of each loop iteration, the max_steps_per kernel value is reached, the tracking stops, and the particle is assigned the BREAK_MAXSTEPS termination code. This means that tracking will continue on the next kernel run.
+#.  **Masks / Termination Conditions** - masks that are checked
 
-Conclude
+    #. **Brain Mask** (mandatory)
+    #. **Exclusion Mask** (optional)
+    #. **Termination Mask** (optional)
+    #. **Waypoint Mask(s)** (optional)
+    #. **Curvature Threshold** (mandatory) - After every FINAL NORMALIZED dr is termined.
 
+#.  **Updating Output Data** - If the temporary position passes all of the specified checks, it is considered valid and the particle state's position and last jump direction are updated.
+
+    #. **Particle Pdf Update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping. Then, after some bit shifting, the relevant bit in the particle's pdf mask is assigned a value of 1, (mask |= 1).
+    #. **Particle Path Update** (optional) Shoud the user specify that pathing information is to be saved, the particle's new position is writing
+
+If, at the end of each loop iteration, the max_steps_per kernel value is reached, the tracking stops, and the particle is assigned the BREAK_MAXSTEPS termination code. This means that tracking will continue on the next kernel run. The interpolation kernel's runtime is a function of the interpolation steps taken per reduction step, as well as the number of particles queued, which relates specifically to the number of available stream processor cores.
 
 Summing
 .......
 
-Each thread operates on a size 32 section of the voxel space and sums the individual particle binary PDF entries into the global uint pdf.
+Currently, once interpolation *finishes*, the summing kernel is queued immediately after. Each thread of the summing kernel operates on a size 32 section of the voxel space and sums the individual particle binary PDF entries into the global pdf. Inside each kernel, every particle is checked for the appropriate termination conditions. If the conditions are satisfied, that particles 32 bit binary mask for that thread's section of the pdf is added to the global pdf. The following operations are performed for each particle:
 
-Operations (for each particle):
+#.  **Check Inclusion Conditions** - Depending on the particle's progress during interpolation, its individual pdf mask may or may not be added to the global total when the summing kernel is executed.
 
-#.  Check Inclusion Conditions
+    #. **Termination** - If the particle has terminated, the termination code has an integer value > 0. Only these are ever considered for summing.
+    #. **Waypoint Condition** - For a particle that has finished tracking, and with waypoint mask use enabled, it is checked whether the particle has pass through all of the waypoints. This condition can either be specified as an AND or OR operation, the former requiring passage through all masks, and the latter requiring passage through only one. Whatever the condition, the particle must meet it to be included in the pdf.
+    #. **Exclusion** - If the termination code is > 0, and not any of: BREAK_INIT, BREAK_INVALID, STILL_FINISHED, the particle is not added to the pdf.
 
-    #. Termination - If the particle has terminated, the termination code has an integer value > 0. Only these are ever considered for summing.
-    #. Waypoint - wayand  vs wayor, if not meet all of them, temrinate
-    #. Exclusion - If the termination code is > 0, and not any of: BREAK_INIT, BREAK_INVALID, STILL_FINISHED
+#. **Summing** - Each binary mask section of each *satisfactory* particle is summed and the global pdf voxels are incremented appropriately. The individual particle masks are bit masks, and so, for a particular spatial voxel, the aggregate sum is obtained by shiting and summing individual particle bit masks in a __local memory container and then added to the global pdf at particle completion.
 
-#. Summing -
+The summing kernel is expected to take longer to run than the interpolation kernel for even very large particle sets as it is O(V), (the number of voxels, XxYxZ), which can reach into the tens of millions for large voxel dimensions.
 
 Reduction
 ^^^^^^^^^
