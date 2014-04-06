@@ -94,12 +94,13 @@ Interpolation
 
 For every reduction step, when a batch of particles is sent to the GPU(s) for processing, two distinct kernels operate on that batch: interpolation and summing. At its core, oclptx aims to mirror exactly the functionality of probtrackx. With respect to interpolation, every operation in the interpolation GPU kernel aims to mirror functionality from the Streamline::Streamlines method in ptx2. All of the tracking constraints, (with the exception of prefdir), and options are implemented. The interpolation kernel work range is simply the space of queued particles. The summing kernel first checks whether a particle is completely finished tracking, (that it has terminated and that its path is to be included in the pdf output). If the particle is valid, its individual pdf mask is parsed and all voxels it passes through are incremented by 1 in the global pdf. To reduce the need for atomic operations, the summing kernel work range is actually the global voxel space, separated into 32 voxel regions. Each summing thread obtains data from all valid particles, and performs summing on it's particular section.
 
-.. _interpolation_flow:
+..
+  .. _interpolation_flow:
 
-.. figure:: images/interpolation_flow.png
-    :scale: 50 %
+  .. figure:: images/interpolation_flow.png
+      :scale: 50 %
 
-    Basic overview of tracking algorithm kernel.
+      Basic overview of tracking algorithm kernel.
 
 To reduce performance penalties, optional tracking steps in either kernel are not compiled if they are unused. This is to reduce any penalties from repeatedly calling conditional statements in the kernel, which decrease performance as the particle count increases.
 
