@@ -47,7 +47,7 @@ source_suffix = '.txt'
 master_doc = 'index'
 
 # General information about the project.
-project = 'ENPH459Final'
+project = 'GPU Accelerated Probabilistic Tractography of Neuron Fibers'
 copyright = '2014, Afshin Haidari-Khabbaz, Jeff Taylor, Steve Novakov'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -200,7 +200,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'ENPH459Final.tex', 'ENPH459Final Documentation',
+  ('index', 'ENPH459Final.tex', project,
    'Afshin Haidari-Khabbaz, Jeff Taylor, Steve Novakov', 'manual'),
 ]
 
@@ -230,7 +230,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'enph459final', 'ENPH459Final Documentation',
+    ('index', 'enph459final', project,
      ['Afshin Haidari-Khabbaz, Jeff Taylor, Steve Novakov'], 1)
 ]
 
@@ -244,7 +244,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'ENPH459Final', 'ENPH459Final Documentation',
+  ('index', 'ENPH459Final', project,
    'Afshin Haidari-Khabbaz, Jeff Taylor, Steve Novakov', 'ENPH459Final', 'One line description of project.',
    'Miscellaneous'),
 ]
