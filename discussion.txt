@@ -134,16 +134,14 @@ Probabilistic Results of Oclptx
 
 TODO STEVE: Describe the results and show the pictures of the biased tracking. I've already stated in the opening that we don't test against the old PTX2 on this step. Here you can expand on what tests NEED to be done by Danny. NO RECOMMENDATIONS HERE
 
-.. _probibilistic1:
+The RNG was tested against a CPU-based reference implementation.  100,000 values were compared over 500 independant seed values, and matched the reference implementation exactly.  We also histogrammed them for qualititative value.
 
+.. _probibilistic1:
 .. figure:: images/probibilistic1.pdf
 
     Caption here as needed
 
-TODO JEFF: PRNG routine. Describe the results, not much of the process. Your ppt slide has a good level of detail for that. NO RECOMMENDATIONS HERE
-
 .. _prng:
-
 .. figure:: images/prng.png
 
     Caption here as needed
@@ -151,6 +149,7 @@ TODO JEFF: PRNG routine. Describe the results, not much of the process. Your ppt
 Multi-Threaded Reduction
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO JEFF: If we are at a point to describe integration with Oclptx, then we describe the results of the integration. Focus on Speed and Correctness (compared to the non-multithreaded version). If we are NOT, then the results are the results of your research with collatz. Focus on TEST results. NO RECOMMONDATIONS HERE
+The threading scheme was tested independantly of the interpolation kernel, using a placeholder kernel which acts like the interpolation kernel, but instead of implementing probabalistic tractography, implements a well-known mathematics problem called the *Collatz Conjecture*[collatzwiki]_.  It was tested both on Jeff's small-scale desktop computer with a single CPU and CFRI's high-end workstation.  The run time for 1,000,000 particles, started in the range 1--10,000,000 are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
+.. [collatzwiki] Collatz conjecture --- Wikipedia, the free encyclopedia http://en.wikipedia.org/wiki/Collatz_conjecture
 
