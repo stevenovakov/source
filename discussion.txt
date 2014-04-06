@@ -73,13 +73,20 @@ ALGORITHM PSEUDO-CODE?
 Reduction
 ^^^^^^^^^
 
-Reduction and Segmentation optimizes the use of GPU resources. Instead of naively running threads until the last one converges, the code is segmented. A segmentation container holds the maximum number of steps per Kernel, so that all threads in a given Kernel will stop interpolating at the MaxSteps number for that Kernel. In previous implementations, when the Kernel terminates, the thread evaluations consolidated CPU-side, where we determine what paths have been calculated completely. New kernels are launched only for the unfinished paths.
+In a high-throughput system like ours, as the system scales up, the task of dispatching data to processors can take longer than the actual data processing.  This effect is well documented in the literature.  Since our target machine is a high-performance workstation with 16 modern CPU cores, and 4 high-end graphics cards, it is important to ensure the dispatch system is efficient and scalable.
 
-Our task with reduction is to implement a multi-threaded version of this process.
+At start time, we create a global first-in first-out (FIFO) queue of particles.  We load this FIFO with the start position of each particle, as well as the initial state of that particle's RNG.  These are loaded onto GPU processors later.
 
-TODO: JEFF
-THIS IS A BASIC OVERVIEW OF YOUR PROCESS. 2-3 PARAGRAPHS MAX. (Feel free to modify what I've written, just filling in what I know and what I salvaged).
+We start our parallelization at the device level.  For each GPU on the system, we create a *Worker* thread.  Each thread is responsible for copying data to and from a single GPU, and starting processing kernels on that GPU.  Since a single thread handles this work, no syncronization is needed here, making it easier to develop and debug.  Additionally, since *Workers* are independant, we support heterogenous platforms, such as a low-end and high-end card, or even cards from multiple vendors, on the same system, without any additional work.
 
+After starting, each *Worker* creates its own work pool of *Reducers*.  After loading a batch of processed particles off of the GPU, the reducers search linearly for finished particles.  Each time a finished particle is found, the Reducer grabs a new particle off our global FIFO of particles.  It stores these particles in a list, which is passed back to the *Worker*.  The FIFO is the only thing shared between the threads.
+
+By double buffering, we can process half the data on the GPU at the same time as the other half is reduced on the CPU.  This feature hasn't been enabled due to time constraints.  It could provide a significant (~30-50%) improvement in performance.  The whole procedure is overviewed in figure :ref:`threading`.
+
+.. _threading:
+.. figure:: images/threading.pdf
+
+    Threading scheme overview flow chart.
 
 Results and Analysis
 --------------------
