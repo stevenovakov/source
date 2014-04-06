@@ -17,7 +17,7 @@ For example, to run oclptx with a folder called "bedpostXdata" located in the cu
   
 Keep in mind that bedpostx outputs data in the form "type_parameter". So for the merged data, the actual files in the example bedpostXdata directory would be named "merged_thsamples", "merged_phisamples", "merged_fsamples". The CLI parser will automatically detect the different types of samples, so that the user only needs to specify the "type" (ie: merged) in the CLI for loading.
   
-Additional options may be specified in the initialization stage to activate different modes of oclptx, load masks, and perform various other functions. The following section will define the options we support in our release.
+Additional options may be specified in the initialization stage to activate different modes of oclptx, load masks, and perform various other functions. The following sections define the options we support in our release.
 
 Supported Options
 ^^^^^^^^^^^^^^^^^
@@ -50,6 +50,9 @@ It is worthwhile to note that if any of the options are inputed incorrectly, the
   --modeuler --steplength=0.25 --waypoints waypoints/way1,waypoints/way2 
   
 In this case, oclptx will run without any of the other options following --sampvox (ie: --savepaths, -m, -x, etc).
+
+
+
 
 
 
