@@ -5,7 +5,7 @@ In this section, we first give an intuitive interpretation of how the old Probtr
 
 Algorithmic Theory
 ------------------
-The tracking algorithm begins by loading multiple sets of fibers created by the bedpostx step.  It repeatedly drops “particles” into the space of the brain, and treats the estimated fiber directions as flow directions.  It steps its way through the brain, a fixed distance at a time, until it reaches some stopping condition, which is typically a user-defined mask.  There are many types of masks, and the differences between them are subtle.  Some masks indicate that the particle should be thrown away, others indicate that it should be stopped, and the result kept. 
+The tracking algorithm begins by loading multiple sets of fibers created by the bedpostx step.  It repeatedly drops “particles” into the space of the brain, and treats the estimated fiber directions as flow directions.  It steps its way through the brain, a fixed distance at a time, until it reaches some stopping condition, which is typically a user-defined mask.  There are many types of masks, and the differences between them are subtle.  Some masks indicate that the particle should be thrown away, others indicate that it should be stopped, and the result kept.
   
 The location of particles is determined by user-defined seeds.  Seeds can be defined individual in text-format, or as a series of volumes and surfaces which the program automatically iterates through. For each seed , many particles are instantiated.  Each particle begins at a random location within a sphere of radius one (voxel) of its seed point. Paths are then interpolated, using the fiber distribution, from this starting location.  Since the particle does not have an initial direction to help it decide which way to follow the first non-directional fibre, typically it will be run twice---once in each direction.  The relation between seeds, particles, and paths is shown in Figure 3.1.
 
@@ -48,13 +48,18 @@ In the initialization step of our code, we do away with the abstracted data stru
 
 It is worth mentioning that the time taken to initialize data does not factor into our speed computations when we present our results. We make this choice since initialization is done once and only once throughout the lifecycle of the program.
 
+TODO: STEVE
+
+Mention the 16 bit packing.
+Allocating buffers over CL_DEVICE_MAX_MEM_ALLOC size may introduce caching issues for data that is not accessed sequentially, (which the BedpostX data is not).
+
 Interpolation
 ^^^^^^^^^^^^^
 
 TODO: STEVE
 THIS IS A BASIC OVERVIEW OF YOUR PROCESS. EXPLAIN THE ALGORITHM WE'VE IMPLEMENTED, NO RESULTS. 2-3 PARAGRAPHS MAX.
 
-ALGORITHM PSEUDO-CODE? 
+ALGORITHM PSEUDO-CODE?
 
 .. _oclptxhandler:
 
@@ -84,18 +89,18 @@ THIS IS A BASIC OVERVIEW OF YOUR PROCESS. 2-3 PARAGRAPHS MAX. (Feel free to modi
 Results and Analysis
 --------------------
 
-Implementing the aforementioned pipeline, we have arrived at a GPU-based tracking system that can be validated for both correctness as well as speed. The results presented in this section are organized as follows: 
+Implementing the aforementioned pipeline, we have arrived at a GPU-based tracking system that can be validated for both correctness as well as speed. The results presented in this section are organized as follows:
 
 * We first show a deterministic comparison between Oclptx and Probtrackx, proving validity as well as computation speed increase.
 * Next, we show the fully probabilistic result of Oclptx using our custom PRNG routine.
-* Finally, we present our work on multi-threaded reduction. 
+* Finally, we present our work on multi-threaded reduction.
 
 We recognize that proving convergence on the probabilistic scenario is necessary to completely prove correctness. While we can produce probablistic results, time did not allow for us to set up the statistical t-tests necessary for validation. Our sponsor has offered to complete this task himself, given that a deterministic match is the critical step.
 
 Deterministic Comparison of Oclptx and Probtrackx
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To test the convergence of our results with expected behaviour, we modified the source code of Probtrackx (ptx2) such that it does not seed randomly. Instead, we forced ptx2 to seed at a predefined location in the brain mask, and we seeded our Oclptx at that same location in the same data set. Hence, by proving that in this deterministic scenario our interpolation algorithm produces exactly the same set of streamlines as the old code, we prove that our algorithm matches the expected results. 
+To test the convergence of our results with expected behaviour, we modified the source code of Probtrackx (ptx2) such that it does not seed randomly. Instead, we forced ptx2 to seed at a predefined location in the brain mask, and we seeded our Oclptx at that same location in the same data set. Hence, by proving that in this deterministic scenario our interpolation algorithm produces exactly the same set of streamlines as the old code, we prove that our algorithm matches the expected results.
 
 We show these results in :ref:`deterministiccomp`. In this data set, we use 1000 seed points and generated 2000 particles, with a maximum of 2000 steps per path. These parameters give us approximately 4 million points. We then sum over these points to determine the error between the results, :math:`\chi ^ 2`, as follows:
 
