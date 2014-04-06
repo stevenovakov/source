@@ -16,7 +16,7 @@ Glossary of Terms
     The Oxford Centre for Functional MRI of the Brain.
     
   FSL
-    FMRIB’s Software Library. An open source collection of MRI data processing tools, including dMRI.
+    FMRIB’s Software Library. An open source collection of MRI data processing tools, including DTI.
     
   GPU
     Graphics Processing Unit. An integrated circuit optimized towards graphics.
@@ -24,7 +24,7 @@ Glossary of Terms
   MRI
     Magnetic Resonsance Imaging.
     
-  openCL
+  OpenCL
     A universal C++ API for interacting with the GPU. 
     
   probtrackx

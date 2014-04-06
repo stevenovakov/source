@@ -1,13 +1,17 @@
 Discussion
 ==========
 
-In this section, we first give an intuitive interpretation of how the old Probtrackx algorithm works. Then, we present our OpenCL-architected solution: Oclptx. We then show the results of Oclptx, comparing both the correctness of the paths, as well as the speed, to the old tracking software.
+In this section, we first give an intuitive interpretation of how the Global Connectivity Estimation algorithm works. Then, we present our OpenCL-architected solution: Oclptx. We then show the results of Oclptx, comparing both the correctness of the paths as well as the speed to the old tracking software.
 
 Algorithmic Theory
 ------------------
-The tracking algorithm begins by loading multiple sets of fibers created by the bedpostx step.  It repeatedly drops “particles” into the space of the brain, and treats the estimated fiber directions as flow directions.  It steps its way through the brain, a fixed distance at a time, until it reaches some stopping condition, which is typically a user-defined mask.  There are many types of masks, and the differences between them are subtle.  Some masks indicate that the particle should be thrown away, others indicate that it should be stopped, and the result kept. 
+The tracking algorithm follows the following routine:
+
+#. Load multiple sets of fiber parameters created by the bedpostx step (:math:`F, \phi, \theta`). These parameters are the anisotropy and vector field parameters, respectively.
+#. Repeatedly drop imaginary “particles” into the space of the brain. In this step, the algorithm treats the estimated fiber directions as flow directions.  
+#. Step through the brain via the flow directions, a fixed distance at a time, until it some stopping conditionv is reached. The stopping condition is typically a user-defined mask. 
   
-The location of particles is determined by user-defined seeds.  Seeds can be defined individual in text-format, or as a series of volumes and surfaces which the program automatically iterates through. For each seed , many particles are instantiated.  Each particle begins at a random location within a sphere of radius one (voxel) of its seed point. Paths are then interpolated, using the fiber distribution, from this starting location.  Since the particle does not have an initial direction to help it decide which way to follow the first non-directional fibre, typically it will be run twice---once in each direction.  The relation between seeds, particles, and paths is shown in Figure 3.1.
+The location of particles is determined by user-defined seeds. Seeds can be defined individual in text-format, or as a series of volumes and surfaces which the program automatically iterates through. For each seed, many particles are instantiated. Each particle begins at a random location within a sphere of its seed point. Paths are then interpolated from this starting location, using the fiber distribution. Since the particle does not have an initial direction to help it decide which way to follow the first non-directional fibre, typically it will be run twice---once in each direction. The relation between seeds, particles, and paths is shown in Figure 3.1.
 
 .. _particle:
 
@@ -15,7 +19,7 @@ The location of particles is determined by user-defined seeds.  Seeds can be def
 
   Relation between seeds, particles, and paths.
 
-For each particle, there will be a resultant path, created by “stepping along” the selected fibers.  For each step, it is randomly determined which adjacent voxel to sample the interpolation direction from.  This selection is inversely proportional to the distance from the nearest vertex.  Once we have a vertex is selected, a fiber orientation must be selected.  There are several options for this, which are selected by the user at start time.  Either a preferred direction is chosen (in which case particles will tend to migrate in a particular direction), or the sampler chooses one of the following options: random with error weights, above a given error threshold, or entirely random.  This process is shown in Figure 3.2.
+As the particle is travelling through voxels, the adjacent voxel to sample the direction from is randomly selected.  This selection is inversely proportional to the distance from the nearest vertex.  Once we know the next vertex, a fiber orientation must be determined.  There are several options for this, all of which are selected by the user at start time.  Either a preferred direction is chosen, or the sampler chooses one of the following options: random with error weights, random above a given error threshold, or entirely random.  This process is shown in Figure 3.2.
 
 .. _pathing:
 
@@ -61,7 +65,7 @@ ALGORITHM PSEUDO-CODE?
 .. figure:: images/oclptxhandler.png
     :scale: 50 %
     
-    Workflow of the openCL interaction layer with the GPU.
+    Workflow of the OpenCL interaction layer with the GPU.
     
 
 .. _oclptxdatadiagram:
