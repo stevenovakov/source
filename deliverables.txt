@@ -12,7 +12,7 @@ Project deliverables specified by the sponsor, and their state of completion:
 
     #. Fully parallel, with support for an arbitrary number of particles.
     #. Functions with the typical CFRI bedpostx parameter dimensions of 256x271x102, and up to the maximum possible allocation size for this data.
-    #. Outputs a total global pdf in a properly formatted ascii file, for which the sponsor can use the fslascii2img library to convert to the desired niftii format.
+    #. Outputs a total global connectivity map in a properly formatted ascii file, for which the sponsor can use the fslascii2img library to convert to the desired niftii format.
 
 **Status**: Completed to specification. However, there is inconsistent operation with very large bedpostx data files on the designated CFRI workstation, sometimes returning garbage results. The issue is not present on our local machines. This is being debugged.
 

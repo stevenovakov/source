@@ -51,21 +51,7 @@ Initialization
 
 In the initialization stage, we manage our data in a custom class called *samplemanager*. The purpose of *samplemanager* is to store static bedpostx/mask data, and provide easy access to the data for the tracking routine. We implemented this class to prevent the duplication of data containers that were used inefficiently in *probtrackx*. *samplemanager* interacts directly with the old *probtrackx* command-line-parser, reading in the myriad of data and options that the user can input (for a complete list of the options, see the Appendix).  The time taken to initialize data does not factor into the speed computations presented in our results.
 
-On the GPU, *oclptx* deals with two types of data: *static data* and *dynamic particle data*. Static data encapsulates any large structures that are written to the GPU once, and which stay in VRAM until all computations are finished. These include bedpostx diffusion parameters as well as any tracking masks. The *oclenv* class is responsible for managing static data once it has been loaded onto the GPU. The following datasets are allocated on buffers into *each* available GPU device during initialization:
-
-* **bedpostx parameter data**: :math:`F, \phi, \theta`, computed and stored in files for *oclptx* to load.
-
-TODO Steve: Define these please (here, not in glossary)
-
-* **Brain mask**.
-
-* **Exclusion mask** (optional).
-
-* **Termination mask** (optional).
-
-* **Waypoint mask** (optional).
-
-* **Global PDF**.
+On the GPU, *oclptx* deals with two types of data: *static data* and *dynamic particle data*. Static data encapsulates any large structures that are written to the GPU once, and which stay in VRAM until all computations are finished. These include *bedpostx* diffusion parameters as well as any tracking masks. The *oclenv* class is responsible for managing static data once it has been loaded onto the GPU. The following datasets are allocated on buffers into *each* available GPU device during initialization: bedpostx parameter data (:math:`F, \phi, \theta`), Brain Mask, Exclusion Mask, Termination Mask, Waypoint Mask(s), and the Global Connectivity Map. The Connectivity Map is the output of our program. We further discuss the masks and their meaning in the Tracking section of this report.
 
 The largest dataset to allocate on the GPU is the parameter data. Parameter data may come in a variety of sizes with respect to the voxel grid. *oclptx* supports any dataset that can fit in the vendor-suggested maximum memory allocation parameter, specific to particular GPU device. For example, sample data obtained from CFRI has dimensions of 256x271x102. Given 32-bit float values, one principal direction of one type of parameter with an average 50 samples per parameter uses ~920MB of VRAM. For consumer level GPU's, the maximum memory allocation parameter is typically ~1/8 of the total VRAM. Therefore, for the CFRI sample data, only high end workstation cards with 6GB+ of VRAM will be able to allocate this memory. It is up to the user to ensure that their data will fit on the device.
 
@@ -76,7 +62,7 @@ The largest dataset to allocate on the GPU is the parameter data. Parameter data
 After static data containers are allocated and synchronized by the *oclenv* class, the remaining GPU memory is determined in bytes, and that value is sent to *oclptxhandler*. *oclptxhandler* uses user-specified options to determine how much memory needs to be allocated per particle, and subsequently maximizes the number of particles that will fit in the remaining memory. The following containers are allocated *per particle*:
 
 * **State**: a struct describing the *persistent* state of a particle:  its current position, last step direction, and the state of its RNG.
-* **PDF mask**: a mask of the entire brain volume.  The particle traces its path through this space.  These values are later added to the global sum.
+* **Global Connectivity mask**: a mask of the entire brain volume.  The particle traces its path through this space.  These values are later added to the global sum.
 * **Path**: an array for the particle to log its full path.  This is used only for debugging and is disabled in normal operation.
 * **Waypoints**: a list indicating which waypoints a particle has encountered.  This is only included if the waypoint masks is enabled.
 * **Loopcheck**: a flow field indicating both where we've been and what direction we were heading when we were there.  It it used to determine whether we are currently retracing our steps, and is optional.
@@ -99,27 +85,27 @@ Any optional tracking steps in the kernels are not compiled if they are unused. 
 Interpolation
 .............
 
-Interpolation on the GPU is done on a per-particle basis. Each thread processes the stepping of a single particle. Upon startup, the last position, RNG seed value, and unit jump direction are loaded.  Then, probabilistic tracking begins.  The RNG contains independant state for each particle.  The RNG implemented returns 64 bits of randomness per call, and contain 5, 64 bit words of state per RNG.  It has a period of :math:`2^258`, as described in [lecuyer99].  The RNG can be optionally disabled, for testing.  If a particle terminates tracking for any reason, it is assigned an exit code.  The code is used by the summing kernel and reduction algorithm to determine whether or not the particle should be included in the output.
+Interpolation on the GPU is done on a per-particle basis. Each thread processes the stepping of a single particle. Upon startup, the last position, RNG seed value, and unit jump direction are loaded.  Then, probabilistic tracking begins.  The RNG contains independent states for each particle.  It returns 64 bits of randomness per call, and contain five 64-bit words of state per RNG.  It has a period of :math:`2^258`, as described in [lecuyer99]_.  The RNG can be optionally disabled for testing.  If a particle terminates tracking for any reason, it is assigned an exit code.  The code is used by the summing kernel and reduction algorithm to determine whether or not the particle should be included in the output.
 
 .. [lecuyer99]  P. L'Ecuyer, "Tables of Maximally Equidistributed Combined LFSR Generators", Mathematics of Computation, 68, 225 (1999), 261--269.  http://www.ams.org/journals/mcom/1999-68-225/S0025-5718-99-01039-X/S0025-5718-99-01039-X.pdf
 
 When a particle is loaded into VRAM and the maximum number of steps per kernel are specified, probabilistic tracking proceeds in the following manner:
 
-#.  **Corner Selection** - The particle is surrounded by a diffusion field.  Since it is always between voxels, it uses the local RNG to decide which voxel it will use.  It picks the nearest voxel with the highest likelihood, and further ones with lower likelihood.
+#.  **Corner Selection** - The particle is surrounded by a diffusion field.  Since it is always between voxels, it uses the local RNG to decide which voxel it will use next.  It picks the nearest voxel with the highest likelihood, and further ones with lower likelihood.
 #.  **Sample Selection** - One of the many samples at this position is selected at random.
-#.  **Stepping** - Use Euler's method to compute a new position based on the selected diffusion sample.  Since the diffusion samples are *directionless*, we choose the direction that minimizes curvature.  Alternately, the user can specify to use the *backward Euler method* instead, which uses the diffusion direction at the target, instead.
+#.  **Stepping** - Euler's method is used to compute a new position based on the selected diffusion sample.  Since the diffusion samples are *directionless*, we choose the direction that minimizes curvature.  Alternately, the user can specify to use the *backward Euler method*, which uses the diffusion direction at the target.
 #.  **Mask Checking** - Various mask conditions (conditions on our current position) are checked.  These are position-based reasons to potentially stop tracking.
 
     #. Brain Mask - the outer limit of the brain.
     #. Exclusion Mask - a user specified region to ignore all particles that enter.
     #. Termination Mask - a user specified region to include all particles that enter.
-    #. Waypoint Mask(s) - a user specified list of 'waypoints' (think of a rally race)
+    #. Waypoint Mask(s) - a user specified list of 'waypoints'. If specified, the particle must pass through these points if the path is to be valid.
     #. Curvature Threshold - an upper limit on tightness of a curve.  Particles that curve tighter will be stopped.
 
-#.  **Updating Output Data** - If the temporary position passes all of the specified checks, it is considered valid. The particle's position and last jump direction can be updated in two ways:
+#.  **Updating Output Data** - If the particle position passes all of the specified checks, it is considered valid. The particle's position and last jump direction can be updated in two ways:
 
-    #. **Local connectivity mask update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping.  This position in the (particle specific) connectivity mask is set to **1**.
-    #. **Particle Path Update** - If the whole path is to be saved, the particle's new position is written to a buffer, which can be dumped to file later.
+    #. **Local Connectivity Mask update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping.  This position in the connectivity mask is set to **1**.
+    #. **Particle Path Update** - If the whole path is to be saved, the particle's new position is written to a buffer, which can be dumped to file.
 
 #.  **Path Length Check** - Check whether this path has reached the maximum path length.  If so, stop.
 
@@ -128,15 +114,15 @@ The runtime of the interpolation kernel depends solely on the configured number 
 Summing
 .......
 
-Once interpolation *finishes*, the summing kernel is queued immediately. Each thread of the summing kernel operates on a section of the voxel space. In each thread, every particle is checked for the appropriate termination conditions. If the conditions are satisfied, that particle's 32-bit entry pdf is added to the global pdf. The following operations are performed for each particle:
+Once interpolation *finishes*, the summing kernel is queued immediately. Each thread of the summing kernel operates on a section of the voxel space. In each thread, every particle is checked for the appropriate termination conditions. If the conditions are satisfied, that particle's 32-bit connectivity map is added to the global connectivity map. The following operations are performed for each particle:
 
-#.  **Check Inclusion Conditions** - As mentioned above, a particle's individual pdf mask may or may not be added to the global total when the summing kernel is executed. There are three possible conditions to check:
+#.  **Check Inclusion Conditions** - As mentioned above, a particle's individual connectivity mask may or may not be added to the global total when the summing kernel is executed. There are three possible conditions to check:
 
     #. **Termination** - If the particle has terminated, the termination code has an integer value > 0. Only these particles are considered for summing.
-    #. **Waypoint Condition** - Only valid if the user provides Waypoint masks. For a particle that has finished tracking, we check whether the particle has passed through all of the waypoints. This condition can either be specified as an AND or OR operation: the former requires passage through all masks, and the latter requires passage through only one. Whatever the condition, the particle must meet it to be included in the pdf.
-    #. **Exclusion** - If the termination code has an integer value > 0, and is not any of BREAK_INIT, BREAK_INVALID, STILL_FINISHED, then the particle is excluded. In other words, it is not added to the pdf.
+    #. **Waypoint Condition** - Only valid if the user provides Waypoint masks. For a particle that has finished tracking, we check whether the particle has passed through all of the waypoints. This condition can either be specified as an AND or OR operation: the former requires passage through all masks, and the latter requires passage through only one. Whatever the condition, the particle must meet it to be included in the global connectivity map.
+    #. **Exclusion** - If the termination code has an integer value > 0, and is not any of BREAK_INIT, BREAK_INVALID, STILL_FINISHED, then the particle is excluded. In other words, it is not added to the global connectivity map.
 
-#. **Summing** - Each binary mask section of each *included* particle is summed, and the global pdf voxels are incremented appropriately. The individual particle masks are bit masks. As such, for a particular voxel, the aggregate sum is obtained by shifting and summing individual particle bit masks in a local memory container. The result is then added to the global pdf at particle completion.
+#. **Summing** - Each binary mask section of each *included* particle is summed, and the global connectivity voxels are incremented appropriately. The individual particle masks are bit masks. As such, for a particular voxel, the aggregate sum is obtained by shifting and summing individual particle bit masks in a local memory container. The result is then added to the global connectivity map at particle completion.
 
 The summing kernel is expected to take longer to run than the interpolation kernel for large particle sets, as it is O(V) where V is the number of voxels. The complexity value can reach up to tens of millions for large voxel dimensions.
 
@@ -212,7 +198,7 @@ The RNG was tested against a CPU-based reference implementation.  100,000 values
 Reduction
 ^^^^^^^^^
 
-The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel. However, instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz Conjecture* [collatzwiki]_, since it accurately mimics asynchronous threading behaviour.  We tested both on a small-scale desktop computer with a single CPU, as well as CFRI's high-end workstation.  The run time for 100,000 particles are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
+The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel. However, instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz Conjecture* [collatzwiki]_, since it accurately mimics asynchronous threading behaviour.  We tested both on a small-scale desktop computer with a single CPU, as well as CFRI's high-end workstation.  The runtime for 100,000 particles are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
 .. _collatz_stepsper:
 .. figure:: images/collatz_stepsper.pdf
