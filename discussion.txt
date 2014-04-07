@@ -75,15 +75,15 @@ The largest dataset to allocate on the GPU is the parameter data. Parameter data
 
 After static data containers are allocated and synchronized by the *oclenv* class, the remaining GPU memory is determined in bytes, and that value is sent to *oclptxhandler*. *oclptxhandler* uses user-specified options to determine how much memory needs to be allocated per particle, and subsequently maximizes the number of particles that will fit in the remaining memory. The following containers are allocated *per particle*:
 
-TODO JEFF: Define these better. 
-
-* **Particle state**: a struct of current position, last step direction, and particle RNG state.
-* **Particle PDF mask**: a binary mask of the global voxel space, unique to a single particle.
-* **Particle path**: an array of size max_steps that contains the full particle path in the voxel space (optional).
-* **Particle waypoints**: for every user-specified waypoint mask there are that many integers per particle to indicate whether the particle has passed through each mask (optional).
-* **Particle loopcheck**: an array of the last flow directions that have been taken in a voxel (optional).
+* **State**: a struct describing the *persistent* state of a particle:  its current position, last step direction, and the state of its RNG.
+* **PDF mask**: a mask of the entire brain volume.  The particle traces its path through this space.  These values are later added to the global sum.
+* **Path**: an array for the particle to log its full path.  This is used only for debugging and is disabled in normal operation.
+* **Waypoints**: a list indicating which waypoints a particle has encountered.  This is only included if the waypoint masks is enabled.
+* **Loopcheck**: a flow field indicating both where we've been and what direction we were heading when we were there.  It it used to determine whether we are currently retracing our steps, and is optional.
 
 To mirror the "dual direction" functionality in *probtrackx* (every particle is instantiated twice, and starts tracking in opposite directions), the starting step direction of each particle is instantiated as {+/-1., 0., 0.}. The specifics of how the containers above are used in tracking is discussed in the next section.
+
+Each particle also has its own RNG.  This ensures that the actual path that is followed is independant of where the particle is processed and the order of processing.  The end result is a fully deterministic system.  The makes results easily replicated across diverse hardware setups, which is a primary design goal, and crucial part of the scientific method.
 
 Tracking
 ^^^^^^^^
@@ -99,47 +99,31 @@ Any optional tracking steps in the kernels are not compiled if they are unused. 
 Interpolation
 .............
 
-Interpolation on the GPU is done on a per-particle basis. Each thread processes the stepping of a single particle. Upon startup, the last position, RNG seed value, and unit jump direction are loaded. Then, tracking begins. By default, tracking is probabilistic, with random number generation performed by a modified Tausworth/LFSR algorithm. The returned RNG value is always a 64-bit unsigned integer. Deterministic tracking can be enabled via the command line, in which case the RNG routine always returns 0. Any normalization to fit the RNG result into a desired interval is done in the interpolation kernel explicitly. If a particle terminates tracking for any reason, it is assigned an exit code. The code is used by the summing kernel and reduction algorithm to determine how to proceed.
+Interpolation on the GPU is done on a per-particle basis. Each thread processes the stepping of a single particle. Upon startup, the last position, RNG seed value, and unit jump direction are loaded.  Then, probabilistic tracking begins.  The RNG contains independant state for each particle.  The RNG implemented returns 64 bits of randomness per call, and contain 5, 64 bit words of state per RNG.  It has a period of :math:`2^258`, as described in [lecuyer99].  The RNG can be optionally disabled, for testing.  If a particle terminates tracking for any reason, it is assigned an exit code.  The code is used by the summing kernel and reduction algorithm to determine whether or not the particle should be included in the output.
+
+.. [lecuyer99]  P. L'Ecuyer, "Tables of Maximally Equidistributed Combined LFSR Generators", Mathematics of Computation, 68, 225 (1999), 261--269.  http://www.ams.org/journals/mcom/1999-68-225/S0025-5718-99-01039-X/S0025-5718-99-01039-X.pdf
 
 When a particle is loaded into VRAM and the maximum number of steps per kernel are specified, probabilistic tracking proceeds in the following manner:
 
-#.  **Volume Fraction Criterion** - The floor() of the current particle position is designated as the "root" vertex in the voxel. In each direction, a random number is generated in the range [0.0, 1.0]. In a given :math:`x,y,z` dimension, if the difference between the particle position and the root vertex is greater than the random number, that dimensional component is incremented by 1 in the vertex space. This method biases particle selection towards the closest vertex while still allowing for selecting the further vertices in the voxel. The incremented vertex is referred to as the "selected vertex".
+#.  **Corner Selection** - The particle is surrounded by a diffusion field.  Since it is always between voxels, it uses the local RNG to decide which voxel it will use.  It picks the nearest voxel with the highest likelihood, and further ones with lower likelihood.
+#.  **Sample Selection** - One of the many samples at this position is selected at random.
+#.  **Stepping** - Use Euler's method to compute a new position based on the selected diffusion sample.  Since the diffusion samples are *directionless*, we choose the direction that minimizes curvature.  Alternately, the user can specify to use the *backward Euler method* instead, which uses the diffusion direction at the target, instead.
+#.  **Mask Checking** - Various mask conditions (conditions on our current position) are checked.  These are position-based reasons to potentially stop tracking.
 
-#.  **Sample Selection** - Random selection of bedpostx parameter sample set. This is the mod(num_samples) of the 64-bit RNG value.
-
-#.  **Stepping** - Mirrors the particle::jump method from *probtrackx*. When a sample is selected, the new jump direction is aligned with the previous jump direction to reduce erratic pathing. The following options are available to use for stepping. Regardless of the options, the resultant particle position, Y{n+1}, is added to the old particle position and stored as a temporary position to be evaluated further.
-
-    #. **Anisotropic Constraint** (optional)- Implemented in the same way as in Streamline::Streamline in *probtrackx*. If the F value selected is less than some random number in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. The particle will still be included in the output pdf.
-    
-    #. **Standard Euler Interpolation** - The standard interpolation is done with the simple Euler method. For a user-specified step length :math:`h` and an orientation vector F(Y) specified by bedpostx, we have:
-
-    .. math::
-    
-      Y_{n+1} = Y_n + h \cdot F (Y_n) \quad  | \quad F(Y) = \dot{Y}
-      
-    
-    #. **Improved Euler Interpolation** (optional) - A more precise, user-specified interpolation method. This method generally produces less erratic results. It is a two-step approach which interpolates as follows:
-
-    .. math::
-    
-      Y_{n+1}^\star = Y_n + h \cdot F (Y_n)
-
-      Y_{n+1}= Y_{n} + \frac{h}{2}(F(Y_n) + F(Y_{n+1}^\star)
-      
-#.  **Mask Checking** (STEVE TODO: What exactly is mask checking entail? Maybe we just cut listing all the masks here again and just give a general idea of what we do?):
-
-    #. Brain Mask
-    #. Exclusion Mask (optional)
-    #. Termination Mask (optional)
-    #. Waypoint Mask(s) (optional)
-    #. Curvature Threshold
+    #. Brain Mask - the outer limit of the brain.
+    #. Exclusion Mask - a user specified region to ignore all particles that enter.
+    #. Termination Mask - a user specified region to include all particles that enter.
+    #. Waypoint Mask(s) - a user specified list of 'waypoints' (think of a rally race)
+    #. Curvature Threshold - an upper limit on tightness of a curve.  Particles that curve tighter will be stopped.
 
 #.  **Updating Output Data** - If the temporary position passes all of the specified checks, it is considered valid. The particle's position and last jump direction can be updated in two ways:
 
-    #. **Particle PDF Update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping. Then, the relevant bit in the particle's pdf mask is assigned a value of 1.
-    #. **Particle Path Update** (optional) - Should the user specify that pathing coordinates are to be saved, the particle's new position is written to a file.
+    #. **Local connectivity mask update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping.  This position in the (particle specific) connectivity mask is set to **1**.
+    #. **Particle Path Update** - If the whole path is to be saved, the particle's new position is written to a buffer, which can be dumped to file later.
 
-If at the end of each loop iteration the max_steps_per kernel value is reached, then the tracking stops and the particle is assigned the BREAK_MAXSTEPS termination code. Tracking will continue on the next kernel run. The interpolation kernel's runtime is a function of the interpolation steps taken, as well as the number of particles queued.
+#.  **Path Length Check** - Check whether this path has reached the maximum path length.  If so, stop.
+
+The runtime of the interpolation kernel depends solely on the configured number of steps per reduce-interpolate cycle.
 
 Summing
 .......
