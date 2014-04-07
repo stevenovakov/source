@@ -27,14 +27,14 @@ Both of these are implemented as a CPU based module and distributed with FSL. Th
 Local Parameter Estimation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Local parameter estimation primarily deals with the creation of a stochastic diffusion map of the scanned volume by extracting a probability distribution function (pdf) of flow amplitude and orientation. These are commonly in spherical coordinates (:math:`p = p(F, \phi, \theta)` ). Because a finite number of orientations are scanned during the DTI sequence, the exact flow direction at a particular point can be represented by some distribution derived from the composite diffusion data.  
+Local parameter estimation primarily deals with the creation of a stochastic diffusion map of the scanned volume by extracting a probability distribution function (pdf) of flow amplitude and orientation. These are commonly in spherical coordinates (:math:`F, \phi, \theta` ). Because a finite number of orientations are scanned during the DTI sequence, the exact flow direction at a particular point can be represented by some distribution derived from the composite diffusion data.  
 
-In FSL, the local parameter estimation module is known as bedpostx. Up until November 2013, when a CUDA port was completed by the FSL team, this step had been an exclusively CPU-based algorithm. The CPU-based bedpostx took as long as 1-5 days to complete processing of a large data set on a modern processor. Mr. Kim of CFRI had previously completed a CUDA port before the FSL team, which has been in use at CFRI since May 2013. It has achieved a ~18x speedup. This port has formally been done in the literature:  Mo Xu et al accomplished a 34x speedup of the parameter estimation step [Xu]_.
+In FSL, the local parameter estimation module is known as bedpostx. Up until November 2013, when a CUDA port was completed by the FSL team, this step had been an exclusively CPU-based algorithm. The CPU-based bedpostxs took as long as 1-5 days to complete processing of a large data set on a modern processor. Mr. Kim of CFRI had previously completed a CUDA port before the FSL team, which has been in use at CFRI since May 2013. It has achieved a ~18x speedup. This port has formally been done in the literature:  Mo Xu et al accomplished a 34x speedup of the parameter estimation step [Xu]_.
 
 Global Connectivity Estimation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The scope of our project focuses on implementing the Global Connectivity Estimation step in a SIMD pipeline. The implementation included already with FSL is named probtrackx. In our project, we name it oclptx. Essentially, the Global Connectivity Estimation can be summarized as follows: 
+The scope of our project focuses on implementing the Global Connectivity Estimation step in a SIMD pipeline. The implementation included already with FSL is named *probtrackx*. In our project, we name it *oclptx*. Essentially, the Global Connectivity Estimation can be summarized as follows: 
 
 * Drop an imaginary particle into the mesh space at a user-selected point.
 * Simulate a step-by-step “flow” of that particle along neural fiber distribution found in the local parameter estimation step.
@@ -53,12 +53,14 @@ Modern GPU hardware contains a highly parallel processing architecture.  For exa
 
 The drawback of this architecture is that in a naïve implementation (all threads run to termination), the running time of all the threads in a single execution block is that of the slowest thread. Therefore, if the lengths of the brain fibers vary significantly [Xu]_, there will be wasted GPU resources. Unless there is some oversight from the host software, the threads that compute the interpolation for the shorter fibers finish first, and these threads remain idle until the longest fiber lengths are computed.
 
-The goal of this project is to convert the old probtrackx algorithm into a functional GPU port that is well integrated with FSL. Additionally, it would be beneficial to explore further optimizations and benchmark them appropriately. 
+The goal of this project is to convert the old *probtrackx* algorithm into a functional GPU port that is well integrated with FSL. 
 
+Organization
+------------
 The rest of this report is organized as follows:
 
 * Discussion of the algorithmic theory behind tracking.
 * Presentation of our implemented architecture on the GPU.
-* Analysis of the results of our tracking algorithm, including a comparison to the old probtrackx implementation.
+* Analysis of the results of our tracking algorithm, including a comparison to the old *probtrackx* implementation.
 * Statement of the deliverables of the project.
 * Recommendations for future development.

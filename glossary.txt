@@ -24,6 +24,9 @@ Glossary of Terms
   MRI
     Magnetic Resonsance Imaging.
     
+  Mask
+    An ascii list of binary numbers (1 or 0). A '1' means that the given area in the brain is valid. A '0' indicates that we are either outside of the brain, or in an invalid area. 
+    
   OpenCL
     A universal C++ API for interacting with the GPU. 
     
@@ -39,8 +42,14 @@ Glossary of Terms
   Voxel
     Similar to a pixel, but in 3-D space. It is 3-D volume that builds up to create a 3-D image.
     
+  VRAM
+    Short hand for Graphics Random Access Memory.
+    
   SIMD
     Single instruction, multiple data. A processing architecture where a single processor can perform a single operation on many parallel data elements.
+    
+  RNG
+    Random Number Generation. When we say 'particle RNG state', we mean the particular state of that particle's independent random number generator.
     
   PRNG
     Pseudo-random number generation. Methods of generating high-variability data sets (within some distribution) in a deterministic hardware scheme that mimic nondeterministic results.
