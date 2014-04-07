@@ -205,13 +205,14 @@ Thus, we have a statistcally negligible error. The differences we have can be ac
 
 Next, we compare the run time of *oclptx* against that of ptx2. For a 4000 particle sample dataset, a deterministic run of ptx2 has an average computation time of **43 seconds** from the point of beginning to interpolate to the point of completion. *oclptx*, for the same dataset, has an average tracking time of **500-1500 milliseconds**. The following table compares the two algorithms for various particle sizes.
 
-===========  =========  ===========
-Sample Size  Ptx2 Time  *oclptx* Time
-===========  =========  ===========
-4000          43s         1000ms
-===========  =========  ===========
+.. table:: Computation times of *oclptx* and Ptx2 compared.
+   
+   ===========  =========  =============
+   Sample Size  Ptx2 Time  *oclptx* Time
+   ===========  =========  =============
+   4000          43s         1000ms
+   ===========  =========  =============
 
-    Computation times of *oclptx* and Ptx2 compared.
 
 TODO: STEVE This is stuff for you; I wrote to the best of my knowledge and research on our results. You can modify/add as needed. Discuss the significance of the results only within the problem space (not for the greater good of humanity or someshit). NO RECOMMENDATIONS HERE
 
