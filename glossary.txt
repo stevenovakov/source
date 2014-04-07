@@ -24,6 +24,9 @@ Glossary of Terms
   MRI
     Magnetic Resonsance Imaging.
     
+  Mask
+    An ascii list of binary numbers (1 or 0). A '1' means that the given area in the brain is valid. A '0' indicates that we are either outside of the brain, or in an invalid area. 
+    
   OpenCL
     A universal C++ API for interacting with the GPU. 
     

@@ -53,8 +53,10 @@ Modern GPU hardware contains a highly parallel processing architecture.  For exa
 
 The drawback of this architecture is that in a naïve implementation (all threads run to termination), the running time of all the threads in a single execution block is that of the slowest thread. Therefore, if the lengths of the brain fibers vary significantly [Xu]_, there will be wasted GPU resources. Unless there is some oversight from the host software, the threads that compute the interpolation for the shorter fibers finish first, and these threads remain idle until the longest fiber lengths are computed.
 
-The goal of this project is to convert the old probtrackx algorithm into a functional GPU port that is well integrated with FSL. Additionally, it would be beneficial to explore further optimizations and benchmark them appropriately. 
+The goal of this project is to convert the old probtrackx algorithm into a functional GPU port that is well integrated with FSL. 
 
+Organization
+------------
 The rest of this report is organized as follows:
 
 * Discussion of the algorithmic theory behind tracking.
