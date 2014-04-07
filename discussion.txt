@@ -235,6 +235,8 @@ Multi-Threaded Reduction
 
 The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel, but instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz conjecture* [collatzwiki]_.  It was tested both on a small-scale desktop computer with a single CPU as well as CFRI's high-end workstation.  The run time for 100,000 particles are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
+We also gathered some profiling information on a low-end single GPU, single CPU desktop, to get an idea of where time is spent in various parts of the process.  Those results are summarized in Table :ref:`perf_percent`
+
 .. [collatzwiki] Collatz conjecture --- Wikipedia, the free encyclopedia http://en.wikipedia.org/wiki/Collatz_conjecture
 
 .. _collatz_stepsper:
@@ -246,4 +248,18 @@ The threading scheme was tested independently of the interpolation kernel. Here,
 .. figure:: images/collatz_workpool.pdf
 
   Runtime of Collatz and Reduction, varying number of 'Reduce' threads.  100,000 particles, 10,000 steps per reduce-process cycle.
+
+
+.. _perf_percent:
+.. table:: Time spent in parts of our algorithm, as a percent
+
+  ================== ===================
+  Component          Percent Time [%]
+  ================== ===================
+  Interpolation      50.9%
+  Summing            43.2%
+  Write New Data     5.8%
+  Read Status        0.1%
+  Reduction          <0.01%
+  ================== ===================
 
