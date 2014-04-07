@@ -44,8 +44,6 @@ Within oclptx, we architect our code around three steps in the pipeline: Initial
 ..
   .. _oclptx:
 
-  .. figure:: images/oclptx.pdf
-
   Block diagram of the Oclptx pipeline. The :math:`F, \phi, \theta` parameters are read in via the initialization step, and then passed into the GPU interpolation and reduction scheme. TODO Steve: FIX
 
 Initialization
@@ -70,9 +68,6 @@ On the GPU, oclptx deals with two types of data: static data and dynamic particl
 The largest dataset to allocate on the GPU is the diffusion parameter data. Parameter data may come in a variety of sizes with respect to the voxel grid. Oclptx supports any sample dataset which can fit in the vendor suggested CL_DEVICE_MAX_MEM_ALLOC_SIZE parameter for a particular GPU device. For example, sample data obtained from CFRI has dimensions of 256x271x102. With 32-bit float values, one principal direction of one type of parameter (either f, phi, or theta) and 50 samples per parameter uses ~920MB of VRAM. For consumer level GPU's, CL_DEVICE_MAX_MEM_ALLOC_SIZE is typically ~1/8 of total VRAM. Therefore, for the sample size given, only higher end workstation cards with 6GB+ of VRAM will be able to allocate this memory. It is up to the user to ensure that their data will fit on the device.
 
   .. _oclptxhandler:
-
-  .. figure:: images/oclptxhandler.png
-      :scale: 50 %
       
     Make this a block diagram of OclEnv. TODO STEVE: REDO THIS
 
@@ -93,10 +88,7 @@ When a batch of particles is sent to the GPU(s) for processing, two distinct ker
 
   .. _interpolation_flow:
 
-  .. figure:: images/interpolation_flow.png
-      :scale: 50 %
-
-      Basic overview of tracking algorithm kernel.
+      Basic overview of tracking algorithm kernel. TODO Steve: Add
 
 Any optional tracking steps in the kernels are not compiled if they are unused. This is to reduce any penalties from repeatedly calling conditional statements in the kernel, which decrease performance as the particle count increases.
 
@@ -111,25 +103,26 @@ When a particle is loaded into VRAM and the maximum number of steps per kernel r
 
 #.  **Sample Selection** - Random selection of BedpostX parameter sample set. This is the mod(num_samples) of the 64 bit RNG value.
 
-#.  **Stepping** - In general, individual particle stepping mirrors the particle::jump method from probtrackx. When a sample is selected, the new jump direction is aligned with the previous jump direction to reduce erratic pathing.
+#.  **Stepping** - In general, individual particle stepping mirrors the particle::jump method from probtrackx. When a sample is selected, the new jump direction is aligned with the previous jump direction to reduce erratic pathing. The following options are available to use for interpolation. Regardless of the options, the resultant particle position, Y{n+1}, is added to the old particle position and stored as a temporary position to be evaluated further.
 
     #. **Anisotropic Constraint** (optional)- Implemented in the same way as in Streamline::Streamline in probtrackx. If the F value selected is less than some random number in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. The particle will still be included in the output pdf.
-    #. **Standard Euler Interpolation** (mandatory)- The standard interpolation is done with the simple Euler method:
+    
+    #. **Standard Euler Interpolation** (mandatory)- The standard interpolation is done with the simple Euler method. For a user-specified step length :math:`h`, and an orientation vector F(Y) specified by bedpostx, we have:
 
     .. math::
+    
       Y_{n+1} = Y_n + h \cdot F (Y_n) \quad  | \quad F(Y) = \dot{Y}
-    where h is the user-specified step length parameter. F(Y) returns a unit vector with an orientation specified by the particular bedpostX parameter.
-    #. **Improved Euler Interpolation** (optional) - A more precise, user-specified interpolation method. It is a two-step method which interpolates as follows:
+      
+    
+    #. **Improved Euler Interpolation** (optional) - A more precise, user-specified interpolation method. This method generally produces less erratic results. It is a two-step approach which interpolates as follows:
 
     .. math::
+    
       Y_{n+1}^\star = Y_n + h \cdot F (Y_n)
 
       Y_{n+1}= Y_{n} + \frac{h}{2}(F(Y_n) + F(Y_{n+1}^\star)
-    This method generally produces less erratic results.
-    
-    Regardless of the options, the resultant :math:`Y_{n+1}` is added to the old particle position and stored as as temporary position to be evaluated further.
-
-#.  Mask Checking (STEVE TODO: Define these please):
+      
+#.  **Mask Checking** (STEVE TODO: Define these please):
 
     #. Brain Mask(mandatory)
     #. Exclusion Mask (optional)
@@ -139,7 +132,7 @@ When a particle is loaded into VRAM and the maximum number of steps per kernel r
 
 #.  **Updating Output Data** - If the temporary position passes all of the specified checks, it is considered valid. The particle's position and last jump direction can be updated in two ways:
 
-    #. **Particle Pdf Update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping. Then, the relevant bit in the particle's pdf mask is assigned a value of 1 (mask |= 1).
+    #. **Particle Pdf Update** - If the temporary position is accepted, its position in the voxel space is determined by an integer mapping. Then, the relevant bit in the particle's pdf mask is assigned a value of 1.
     #. **Particle Path Update** (optional) Should the user specify that pathing coordinates are to be saved, the particle's new position is written to a file.
 
 If, at the end of each loop iteration the max_steps_per kernel value is reached, then the tracking stops and the particle is assigned the BREAK_MAXSTEPS termination code. This means that tracking will continue on the next kernel run. The interpolation kernel's runtime is a function of the interpolation steps taken, as well as the number of particles queued.

@@ -7,7 +7,7 @@ Welcome to ENPH 459 Final's documentation!
 ==========================================
   
 .. toctree::
-   :maxdepth: 12
+   :maxdepth: 13
    
    glossary
    executive summary
