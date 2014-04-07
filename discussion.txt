@@ -155,19 +155,18 @@ The summing kernel is expected to take longer to run than the interpolation kern
 Reduction
 ^^^^^^^^^
 
-Reduction and Segmentation optimizes the use of GPU resources. Instead of naively running threads until the last one converges, the code is segmented. A segmentation container holds the maximum number of steps per Kernel, so that all threads in a given Kernel will stop interpolating at the MaxSteps number for that Kernel. In previous implementations, when the Kernel terminates, the thread evaluations consolidated CPU-side, where we determine what paths have been calculated completely. New kernels are launched only for the unfinished paths.
+In a high-throughput system like ours, as the system scales up, the task of dispatching data to processors can take longer than the actual data processing.  This effect is well documented in the literature.  Our target machine is a high-performance workstation with 16 modern CPU cores, and 4 high-end graphics cards. As such, it is important to ensure the dispatch system is efficient and scalable.
 
-Our task with reduction is to implement a multi-threaded version of this process.
+At start time, we create a global first-in first-out (FIFO) queue of particles.  We load this FIFO with the start position of each particle, as well as the initial state of that particle's RNG.  These are eventually loaded onto the GPU processors.
 
-TODO: JEFF
-THIS IS A BASIC OVERVIEW OF YOUR PROCESS. 2-3 PARAGRAPHS MAX. (Feel free to modify what I've written, just filling in what I know and what I salvaged).
+We start the parallelization at the device level.  For each GPU on the system, we create a *Worker* thread.  Each thread is responsible for copying data to and from a single GPU, and starting processing kernels on that GPU.  Since a single thread handles this work, no synchronization is needed here, making it easier to develop and debug.  Additionally, since *Workers* are independent, we support heterogeneous platforms. These include both low-end and high-end cards, or even cards from multiple vendors. We can support these on the same system without any additional work.
 
-.. _oclptxdatadiagram:
+After initializing, each *Worker* creates its own work pool of *Reducers*.  It then loads a batch of processed particles off of the GPU. At this point, the reducers search linearly for finished particles.  Each time a finished particle is found, the Reducer grabs a new particle off of our global FIFO of particles.  It stores these particles in a list, which is passed back to the *Worker*.  The FIFO is the only thing shared between the threads. The whole procedure is outlined in figure :ref:`threading`.
 
-.. figure:: images/datadiagram.pdf
+.. _threading:
+.. figure:: images/threading.pdf
 
-    Multiple GPU interpolation workflow.
-
+    Threading scheme overview flow chart.
 
 Results and Analysis
 --------------------
@@ -217,16 +216,14 @@ Probabilistic Results of Oclptx
 
 TODO STEVE: Describe the results and show the pictures of the biased tracking. I've already stated in the opening that we don't test against the old PTX2 on this step. Here you can expand on what tests NEED to be done by Danny. NO RECOMMENDATIONS HERE
 
-.. _probibilistic1:
+The RNG was tested against a CPU-based reference implementation.  100,000 values were compared over 500 independant seed values, and matched the reference implementation exactly.  We also histogrammed them for qualititative value.
 
+.. _probibilistic1:
 .. figure:: images/probibilistic1.pdf
 
     Caption here as needed
 
-TODO JEFF: PRNG routine. Describe the results, not much of the process. Your ppt slide has a good level of detail for that. NO RECOMMENDATIONS HERE
-
 .. _prng:
-
 .. figure:: images/prng.png
 
     Caption here as needed
@@ -234,6 +231,7 @@ TODO JEFF: PRNG routine. Describe the results, not much of the process. Your ppt
 Multi-Threaded Reduction
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO JEFF: If we are at a point to describe integration with Oclptx, then we describe the results of the integration. Focus on Speed and Correctness (compared to the non-multithreaded version). If we are NOT, then the results are the results of your research with collatz. Focus on TEST results. NO RECOMMONDATIONS HERE
+The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel, but instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz Conjecture*[collatzwiki]_.  It was tested both on a small-scale desktop computer with a single CPU as well as CFRI's high-end workstation.  The run time for 1,000,000 particles, starting in the range 1--10,000,000 (TODO JEFF: What is this range?) are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
+.. [collatzwiki] Collatz conjecture --- Wikipedia, the free encyclopedia http://en.wikipedia.org/wiki/Collatz_conjecture
 
