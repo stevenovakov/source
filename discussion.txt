@@ -225,22 +225,45 @@ TODO STEVE: Describe the results and show the pictures of the biased tracking. I
 
 The RNG was tested against a CPU-based reference implementation.  100,000 values were compared over 500 independant seed values, and matched the reference implementation exactly.  We also histogrammed them for qualititative value.
 
-.. _probibilistic1:
-.. figure:: images/probibilistic1.pdf
+Reduction
+^^^^^^^^^
 
-    Caption here as needed
+The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel. However, instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz Conjecture* [collatzwiki]_, since it accurately mimics asynchronous threading behaviour.  We tested both on a small-scale desktop computer with a single CPU, as well as CFRI's high-end workstation.  The run time for 100,000 particles are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
-.. _prng:
-.. figure:: images/prng.png
+.. _collatz_stepsper:
+.. figure:: images/collatz_stepsper.pdf
 
-    Caption here as needed
+  Runtime of Collatz and Reduction, varying number of steps per reduce-process cycle.  100,000 particles, 2 'Reduce' threads.
+  
+The data shown in Figure :ref:`collatz_stepsper` demonstrates how performance fares when we modify the number of steps each interpolation kernel takes before reduction. The last datapoint in the figure shows a dramatic increase in runtime for the step lengths greater than :math:`10^4`. At this point, most of the threads have finished and are idling while a final few threads finish their computations. Mo Xu et al. performed a similar test scenario, and it is useful for optimizing the ideal maximum number of steps parameter in the code. 
 
-Multi-Threaded Reduction
-^^^^^^^^^^^^^^^^^^^^^^^^
+To understand resource usage on the worst-case machine, we profiled our code on the small-scale single GPU, single CPU desktop. The profiling test demonstrates where time is spent in various parts of the program's lifecycle.  These results are summarized in Table :ref:`perf_percent`.
 
-The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel, but instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz Conjecture*[collatzwiki]_.  It was tested both on a small-scale desktop computer with a single CPU as well as CFRI's high-end workstation.  The run time for 1,000,000 particles, starting in the range 1--10,000,000 (TODO JEFF: What is this range?) are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
-TODO Jeff: Resolve References here. Collatz picture, Step-length vs time, PROFILING TABLE
+.. _perf_percent:
+.. table:: Time spent in parts of our algorithm, as a percentage of total time.
+
+  ================== ===================
+  Component          Percent Time [%]
+  ================== ===================
+  Interpolation      50.9%
+  Summing            43.2%
+  Write New Data     5.8%
+  Read Status        0.1%
+  Reduction          <0.01%
+  ================== ===================
+
+Table :ref:`perf_percent` presents an interesting point of discussion. In our architecture, Interpolation and Summing are performed on the GPU. Reduction is performed on the CPU, and Write New Data/Read Status are communication between the CPU and GPU. Therefore, on our low-end machine, the program spends 94.1% of its time on the GPU kernels. Mo-Xu et al. present a different result. In their profiling, they obtained ~55% of total time spent on the GPU kernels [Xu]_. There are two reasons for this difference:
+
+#. Mo-Xu et al. were working with a simplified kernel, not requiring the summing step that our sponsor requires.
+#. Our GPU code is not as optimized as Mo Xu's. Our project sponsor asked for focus on the additional features, such as masks, once we had obtained a reasonable speedup.
+
+As such, though we obtained the sponsor's speedup requirements, our code performance can be improved.  We present our recommendations to improve our code in the recommendations section of this report.
 
 .. [collatzwiki] Collatz conjecture --- Wikipedia, the free encyclopedia http://en.wikipedia.org/wiki/Collatz_conjecture
 
+
+.. _collatz_workpool:
+.. figure:: images/collatz_workpool.pdf
+
+  Runtime of Collatz and Reduction, varying number of 'Reduce' threads.  100,000 particles, 10,000 steps per reduce-process cycle.

@@ -1,9 +1,9 @@
 Conclusions
 ===========
 
-To conclude, we have successfully implemented lclptx, an OpenCL-based version of the Global Connectivity Estimation algorithm based on the *probtrackx* algorithm. Our solution is validated for both correctness and speed increase for the deterministic scenario. We also produce results for the probabilistic scenario, and we leave the validation for our sponsor to complete. 
+To conclude, we have successfully implemented *oclptx*, an OpenCL-based version of the Global Connectivity Estimation algorithm based on the *probtrackx* algorithm. Our solution is validated for both correctness and speed increase for the deterministic scenario. We also produce results for the probabilistic scenario, and we leave the validation for our sponsor to complete. 
 
-For the deterministic scenario, we pass in the same dataset for *probtrackx* and *oclptx*. We modify *probtrackx* to seed our initial point in exactly the same place that *oclptx* seeds that point, then we run both algorithms. Upon completion, we compute the difference of the sum of the squares of each point along the resultant paths, :math:`{ \langle \chi^2 \rangle } \simeq {O(10^{-13})}`. Such a minute difference between the results is statistically negligible, and indicates the convergence of the algorithms. 
+For the deterministic scenario, we pass in the same dataset for *probtrackx* and *oclptx*. Upon completion of both algorithms, the difference in the resultant paths are :math:`{ \langle \chi^2 \rangle } \simeq {O(10^{-13})}`. A minute difference between the results is statistically negligible, and indicates the convergence of the algorithms. 
 
 We then test for computation speed between the two algorithms for the same dataset. For a 4000 particle run, *probtrackx* takes and average of 43s to track, whereas *oclptx* reaches completion at an average of 1000ms (~1s). Thus, we see a speed increase of x43 with the GPU implementation. 
 
