@@ -49,7 +49,7 @@ Glossary of Terms
     Single instruction, multiple data. A processing architecture where a single processor can perform a single operation on many parallel data elements.
     
   RNG
-    Random Number Generation.
+    Random Number Generation. When we say 'particle RNG state', we mean the particular state of that particle's independent random number generator.
     
   PRNG
     Pseudo-random number generation. Methods of generating high-variability data sets (within some distribution) in a deterministic hardware scheme that mimic nondeterministic results.

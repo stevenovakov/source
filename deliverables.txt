@@ -11,12 +11,12 @@ Project deliverables specified by the sponsor, and their state of completion:
 1.  A GPU based implementation of the probabilistic tracking algorithm that produces identical or near-identical results as the existing CPU based implementation, with the following points of consideration:
 
     #. Fully parallel, with support for an arbitrary number of particles.
-    #. Functions with the typical CFRI bedpostX parameter dimensions of 256x271x102, and up to the maximum possible allocation size for this data.
+    #. Functions with the typical CFRI bedpostx parameter dimensions of 256x271x102, and up to the maximum possible allocation size for this data.
     #. Outputs a total global pdf in a properly formatted ascii file, for which the sponsor can use the fslascii2img library to convert to the desired niftii format.
 
-**Status**: Completed to specification. However, there is inconsistent operation with very large bedpostX data files on the designated CFRI workstation, sometimes returning garbage results. The issue is not present on our local machines. This is being debugged.
+**Status**: Completed to specification. However, there is inconsistent operation with very large bedpostx data files on the designated CFRI workstation, sometimes returning garbage results. The issue is not present on our local machines. This is being debugged.
 
-2.  Feature port of additional features included in the probtrackx suite:
+2.  Feature port of additional features included in the *probtrackx* suite:
 
     #. Termination/Exclusion mask support.
     #. Waypoint Mask support.
@@ -24,7 +24,7 @@ Project deliverables specified by the sponsor, and their state of completion:
 
 **Status**: Completed to specification.
 
-3. Update the Graphical User Interface (GUI) to be able to interact with oclptx.
+3. Update the Graphical User Interface (GUI) to be able to interact with *oclptx*.
 
 **Status**: Cut from the project scope. The sponsor will implement the GUI.
 

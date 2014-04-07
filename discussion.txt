@@ -1,7 +1,7 @@
 Discussion
 ==========
 
-In this section, we first give an intuitive interpretation of how the Global Connectivity Estimation algorithm works. Then, we present our OpenCL solution: oclptx. Finally, we show the results of oclptx, comparing both the correctness of the paths as well as the speed to the old tracking software.
+In this section, we first give an intuitive interpretation of how the Global Connectivity Estimation algorithm works. Then, we present our OpenCL solution: *oclptx*. Finally, we show the results of *oclptx*, comparing both the correctness of the paths as well as the speed to the old tracking software.
 
 Algorithmic Theory
 ------------------
@@ -31,29 +31,29 @@ As the particle is traveling through voxels, the adjacent voxel from which we sa
 Methods and Architecture
 ------------------------
 
-Oclptx fits as a separate module in the FSL suite (Figure 3.3). The code takes identical command-line parameters from a user using oclptx as from one using probtrackx. These parameters are primarily bedpostx data, along with brainmasks and other user-specified options.
+*oclptx* fits as a separate module in the FSL suite (Figure 3.3). The code takes identical command-line parameters from a user using *oclptx* as from one using *probtrackx*. These parameters are primarily bedpostx data, along with masks and other user-specified options.
 
 .. _fsl:
 
 .. figure:: images/fsl.png
 
-  Simplified diagram of FSL: bedpostX results are parsed and converted for use on the GPU via a "samplemanager" class.
+  Simplified diagram of FSL: bedpostx results are parsed and converted for use on the GPU via a "*samplemanager*" class.
 
-Within oclptx, we architect our code around three steps in the pipeline: Initialization, Tracking, and Reduction (Figure 3.4).
+Within *oclptx*, we architect our code around three steps in the pipeline: Initialization, Tracking, and Reduction (Figure 3.4).
 
 ..
   .. _oclptx:
 
-  Block diagram of the Oclptx pipeline. The :math:`F, \phi, \theta` parameters are read in via the initialization step, and then passed into the GPU interpolation and reduction scheme. TODO Steve: FIX
+  Block diagram of the *oclptx* pipeline. The :math:`F, \phi, \theta` parameters are read in via the initialization step, and then passed into the GPU interpolation and reduction scheme. TODO Steve: FIX
 
 Initialization
 ^^^^^^^^^^^^^^
 
-In the initialization stage, we manage our data in a custom class called samplemanager. Samplemanager's purpose is to store static bedpostx/mask data, and provide easy access to the data for the tracking routine. We implemented this class to prevent the duplication of data containers that were used inefficiently in probtrackx. Samplemanager interacts directly with the old probtrackx command-line-parser, reading in the myriad of data and options that the user can input (for a complete list of the options, see the Appendix).  The time taken to initialize data does not factor into the speed computations presented in our results.
+In the initialization stage, we manage our data in a custom class called *samplemanager*. The purpose of *samplemanager* is to store static bedpostx/mask data, and provide easy access to the data for the tracking routine. We implemented this class to prevent the duplication of data containers that were used inefficiently in *probtrackx*. *samplemanager* interacts directly with the old *probtrackx* command-line-parser, reading in the myriad of data and options that the user can input (for a complete list of the options, see the Appendix).  The time taken to initialize data does not factor into the speed computations presented in our results.
 
-On the GPU, oclptx deals with two types of data: *static data* and *dynamic particle data*. Static data encapsulates any large structures that are written to the GPU once, and which stay in VRAM until all computations are finished. These include bedpostx diffusion parameters as well as any tracking masks. The oclenv class is responsible for managing static data once it has been loaded onto the GPU. The following datasets are allocated on buffers into *each* available GPU device during initialization:
+On the GPU, *oclptx* deals with two types of data: *static data* and *dynamic particle data*. Static data encapsulates any large structures that are written to the GPU once, and which stay in VRAM until all computations are finished. These include bedpostx diffusion parameters as well as any tracking masks. The *oclenv* class is responsible for managing static data once it has been loaded onto the GPU. The following datasets are allocated on buffers into *each* available GPU device during initialization:
 
-* **BedpostX parameter data**: :math:`F, phi, theta`. By default, one fiber direction is copied to the device. Other directions are only copied if specified by the user.
+* **bedpostx parameter data**: :math:`F, \phi, \theta`, computed and stored in files for *oclptx* to load.
 
 TODO Steve: Define these please (here, not in glossary)
 
@@ -67,26 +67,28 @@ TODO Steve: Define these please (here, not in glossary)
 
 * **Global PDF**.
 
-The largest dataset to allocate on the GPU is the parameter data. Parameter data may come in a variety of sizes with respect to the voxel grid. Oclptx supports any dataset that can fit in the vendor-suggested *CL_DEVICE_MAX_MEM_ALLOC_SIZE* parameter specific to particular GPU device. For example, sample data obtained from CFRI has dimensions of 256x271x102. Given 32-bit float values, one principal direction of one type of parameter with an average 50 samples per parameter uses ~920MB of VRAM. For consumer level GPU's, *CL_DEVICE_MAX_MEM_ALLOC_SIZE* is typically ~1/8 of total VRAM. Therefore, for the sample size given, only high end workstation cards with 6GB+ of VRAM will be able to allocate this memory. It is up to the user to ensure that their data will fit on the device.
+The largest dataset to allocate on the GPU is the parameter data. Parameter data may come in a variety of sizes with respect to the voxel grid. *oclptx* supports any dataset that can fit in the vendor-suggested maximum memory allocation parameter, specific to particular GPU device. For example, sample data obtained from CFRI has dimensions of 256x271x102. Given 32-bit float values, one principal direction of one type of parameter with an average 50 samples per parameter uses ~920MB of VRAM. For consumer level GPU's, the maximum memory allocation parameter is typically ~1/8 of the total VRAM. Therefore, for the CFRI sample data, only high end workstation cards with 6GB+ of VRAM will be able to allocate this memory. It is up to the user to ensure that their data will fit on the device.
 
   .. _oclptxhandler:
       
-    Make this a block diagram of OclEnv. TODO STEVE: REDO THIS
+    Make this a block diagram of *oclenv*. TODO STEVE: REDO THIS
 
-After static data containers are allocated and synchronized by the oclenv class, the remaining GPU memory is determined in bytes, and that value is sent to oclptxhandler. OclptxHandler uses user-specified options to determine how much memory needs to be allocated per particle, and subsequently maximizes the number of particles that will fit in the remaining memory. The following containers are allocated *per particle*:
+After static data containers are allocated and synchronized by the *oclenv* class, the remaining GPU memory is determined in bytes, and that value is sent to *oclptxhandler*. *oclptxhandler* uses user-specified options to determine how much memory needs to be allocated per particle, and subsequently maximizes the number of particles that will fit in the remaining memory. The following containers are allocated *per particle*:
 
-* **Particle coordinates**: a 64-bit struct of current position, last step direction, and particle state values.
+TODO JEFF: Define these better. 
+
+* **Particle state**: a struct of current position, last step direction, and particle RNG state.
 * **Particle PDF mask**: a binary mask of the global voxel space, unique to a single particle.
 * **Particle path**: an array of size max_steps that contains the full particle path in the voxel space (optional).
 * **Particle waypoints**: for every user-specified waypoint mask there are that many integers per particle to indicate whether the particle has passed through each mask (optional).
 * **Particle loopcheck**: an array of the last flow directions that have been taken in a voxel (optional).
 
-To mirror the "dual direction" functionality in probtrackx (every particle is instantiated twice, and starts tracking in opposite directions), the starting vector of each particle is instantiated as {+/-1., 0., 0.}. The specifics of how the containers above are used in tracking is discussed in the next section.
+To mirror the "dual direction" functionality in *probtrackx* (every particle is instantiated twice, and starts tracking in opposite directions), the starting step direction of each particle is instantiated as {+/-1., 0., 0.}. The specifics of how the containers above are used in tracking is discussed in the next section.
 
 Tracking
 ^^^^^^^^
 
-When a batch of particles is sent to the GPU(s) for tracking, two distinct kernels operate on that batch: **interpolation** and **summing**. Every operation in the interpolation GPU kernel mirrors functionality from the Streamline::Streamlines method in probtrackx. The interpolation kernel's work range is simply the space of queued particles. To reduce the need for atomic operations, the summing kernel's work range is actually the global voxel space separated into 32 voxel regions. Each summing thread obtains data from all valid particles, and performs summing on its particular section.
+When a batch of particles is sent to the GPU(s) for tracking, two distinct kernels operate on that batch: **interpolation** and **summing**. Every operation in the interpolation GPU kernel mirrors functionality from the Streamline::Streamlines method in *probtrackx*. The interpolation kernel's work range is simply the space of queued particles. To reduce the need for atomic operations, the summing kernel's work range is actually the global voxel space separated into 32 voxel regions. Each summing thread obtains data from all valid particles, and performs summing on its particular section.
 
   .. _interpolation_flow:
 
@@ -105,9 +107,9 @@ When a particle is loaded into VRAM and the maximum number of steps per kernel a
 
 #.  **Sample Selection** - Random selection of bedpostx parameter sample set. This is the mod(num_samples) of the 64-bit RNG value.
 
-#.  **Stepping** - Mirrors the particle::jump method from probtrackx. When a sample is selected, the new jump direction is aligned with the previous jump direction to reduce erratic pathing. The following options are available to use for stepping. Regardless of the options, the resultant particle position, Y{n+1}, is added to the old particle position and stored as a temporary position to be evaluated further.
+#.  **Stepping** - Mirrors the particle::jump method from *probtrackx*. When a sample is selected, the new jump direction is aligned with the previous jump direction to reduce erratic pathing. The following options are available to use for stepping. Regardless of the options, the resultant particle position, Y{n+1}, is added to the old particle position and stored as a temporary position to be evaluated further.
 
-    #. **Anisotropic Constraint** (optional)- Implemented in the same way as in Streamline::Streamline in probtrackx. If the F value selected is less than some random number in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. The particle will still be included in the output pdf.
+    #. **Anisotropic Constraint** (optional)- Implemented in the same way as in Streamline::Streamline in *probtrackx*. If the F value selected is less than some random number in [0.0, 1.0], the stepping simply terminates with exit code ANISO_BREAK. The particle will still be included in the output pdf.
     
     #. **Standard Euler Interpolation** - The standard interpolation is done with the simple Euler method. For a user-specified step length :math:`h` and an orientation vector F(Y) specified by bedpostx, we have:
 
@@ -165,6 +167,8 @@ We start the parallelization at the device level.  For each GPU on the system, w
 
 After initializing, each *Worker* creates its own work pool of *Reducers*.  It then loads a batch of processed particles off of the GPU. At this point, the reducers search linearly for finished particles.  Each time a finished particle is found, the Reducer grabs a new particle off of our global FIFO of particles.  It stores these particles in a list, which is passed back to the *Worker*.  The FIFO is the only thing shared between the threads. The whole procedure is outlined in figure :ref:`threading`.
 
+TODO Jeff: Conceptual diagram from first presentations
+
 .. _threading:
 .. figure:: images/threading.pdf
 
@@ -175,16 +179,16 @@ Results and Analysis
 
 Implementing the aforementioned pipeline, we have arrived at a GPU-based tracking system that can be validated for both correctness as well as speed. The results presented in this section are organized as follows:
 
-* We first show a deterministic comparison between Oclptx and Probtrackx, proving validity as well as computation speed increase.
-* Next, we show the fully probabilistic result of Oclptx using our custom PRNG routine.
+* We first show a deterministic comparison between *oclptx* and *probtrackx*, proving validity as well as computation speed increase.
+* Next, we show the fully probabilistic result of *oclptx* using our custom PRNG routine.
 * Finally, we present our work on multi-threaded reduction.
 
 We recognize that proving convergence on the probabilistic scenario is necessary to completely prove correctness. While we can produce probablistic results, time did not allow for us to set up the statistical t-tests necessary for validation. Our sponsor has offered to complete this task himself, given that a deterministic match is the critical step.
 
-Deterministic Comparison of Oclptx and Probtrackx
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Deterministic Comparison of *oclptx* and *probtrackx*
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To test the convergence of our results with expected behaviour, we modified the source code of Probtrackx (ptx2) such that it does not seed randomly. Instead, we forced ptx2 to seed at a predefined location in the brain mask, and we seeded our Oclptx at that same location in the same data set. Hence, by proving that in this deterministic scenario our interpolation algorithm produces exactly the same set of streamlines as the old code, we prove that our algorithm matches the expected results.
+To test the convergence of our results with expected behaviour, we modified the source code of *probtrackx* (ptx2) such that it does not seed randomly. Instead, we forced ptx2 to seed at a predefined location in the brain mask, and we seeded our *oclptx* at that same location in the same data set. Hence, by proving that in this deterministic scenario our interpolation algorithm produces exactly the same set of streamlines as the old code, we prove that our algorithm matches the expected results.
 
 We show these results in :ref:`deterministiccomp`. In this data set, we use 1000 seed points and generated 2000 particles, with a maximum of 2000 steps per path. These parameters give us approximately 4 million points. We then sum over these points to determine the error between the results, :math:`\chi ^ 2`, as follows:
 
@@ -194,27 +198,27 @@ We show these results in :ref:`deterministiccomp`. In this data set, we use 1000
 
 .. figure:: images/deterministiccomp.pdf
 
-    Deterministic comparison of paths generated by Probtrackx (ptx2) and Oclptx, plotted with Python.
+    Deterministic comparison of paths generated by **probtrackx** and *oclptx*, plotted with Python.
 
 
 Thus, we have a statistcally negligible error. The differences we have can be accounted for if we consider deviations in how the GPU calculates quantities such as sine or cosine. Fundementally, we have shown that the deterministic results of the two pipelines are identical.
 
-Next, we compare the run time of Oclptx against that of ptx2. For a 4000 particle sample dataset, a deterministic run of ptx2 has an average computation time of **43 seconds** from the point of beginning to interpolate to the point of completion. Oclptx, for the same dataset, has an average tracking time of **500-1500 milliseconds**. The following table compares the two algorithms for various particle sizes.
+Next, we compare the run time of *oclptx* against that of ptx2. For a 4000 particle sample dataset, a deterministic run of ptx2 has an average computation time of **43 seconds** from the point of beginning to interpolate to the point of completion. *oclptx*, for the same dataset, has an average tracking time of **500-1500 milliseconds**. The following table compares the two algorithms for various particle sizes.
 
 ===========  =========  ===========
-Sample Size  Ptx2 Time  Oclptx Time
+Sample Size  Ptx2 Time  *oclptx* Time
 ===========  =========  ===========
 4000          43s         1000ms
 ===========  =========  ===========
 
-    Computation times of Oclptx and Ptx2 compared.
+    Computation times of *oclptx* and Ptx2 compared.
 
 TODO: STEVE This is stuff for you; I wrote to the best of my knowledge and research on our results. You can modify/add as needed. Discuss the significance of the results only within the problem space (not for the greater good of humanity or someshit). NO RECOMMENDATIONS HERE
 
 TODO (steve): going to perform some actual timing benchmarking tonight and include 3-4 plots here.
 
-Probabilistic Results of Oclptx
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Probabilistic Results of *oclptx*
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 TODO STEVE: Describe the results and show the pictures of the biased tracking. I've already stated in the opening that we don't test against the old PTX2 on this step. Here you can expand on what tests NEED to be done by Danny. NO RECOMMENDATIONS HERE
 
@@ -235,7 +239,7 @@ Multi-Threaded Reduction
 
 The threading scheme was tested independently of the interpolation kernel. Here, we used a placeholder kernel which acts like the interpolation kernel, but instead of implementing probabilistic tractography, we implemented a well-known mathematics problem called the *Collatz Conjecture*[collatzwiki]_.  It was tested both on a small-scale desktop computer with a single CPU as well as CFRI's high-end workstation.  The run time for 1,000,000 particles, starting in the range 1--10,000,000 (TODO JEFF: What is this range?) are depicted in Figures :ref:`collatz_stepsper` and :ref:`collatz_workpool`.  All data was verified against a reference implementation, which gives us confidence that the threading scheme is well-implemented and reliable.
 
-TODO Jeff: Resolve References here.
+TODO Jeff: Resolve References here. Collatz picture, Step-length vs time, PROFILING TABLE
 
 .. [collatzwiki] Collatz conjecture --- Wikipedia, the free encyclopedia http://en.wikipedia.org/wiki/Collatz_conjecture
 
