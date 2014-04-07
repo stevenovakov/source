@@ -3,6 +3,8 @@ Recommendations
 
 We now present our final recommendations for future developers. As we have completed the bulk of our commitment, the structure of the Oclptx is robust. Therefore, our recommendations are geared toward porting in additional features, and projects for developers to build upon our module.
 
+During development, 16-bit fixed point encoding was attempted on the bedpostX data to compress it and lower memory requirements. F data was encoded as 1:15, Phi data was encoded as 3:13 and theta data was encoded as 2:14 (bits before decimal : bits after decimal). Subsequent testing revealed a significant divergence from the deterministic ptx2 results, the total mean-square error of the test set went up by a factor of 10^4. As the main goal was to provide a precise, functionally equivalent port for CFRI, this functionality was shelved. However, should users run into severe memory limitations, this may be an acceptable solution.
+
 #. TODO Team
 #. TODO Team
 #. TODO Team
